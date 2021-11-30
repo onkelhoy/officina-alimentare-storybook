@@ -1,0 +1,101 @@
+{
+  "header": {
+    "title": "Officina Alimentare",
+    "parts": {
+      "story": "Story",
+      "service": "Service",
+      "team": "Team",
+      "portfolio": "Portfolio",
+      "contact": "Contact"
+    }
+  },
+  "service": {
+    "title": "Service",
+    "description": "...we aim straight to the heart of the problem, improve products, increase efficiency! We offer small and medium enterprises our many years of experience and expertise, to help them reach levels of excellence",
+    "product_development": {
+      "title": "Development of new products",
+      "texts": [
+        "Support in the study of new products, in the dairy sector, sweet and savoury vegetable preserves, special products with nutritional claims, breakfast products, sweet and savoury snacks, vegetable drinks",
+        "Research and selection of producers on behalf of third parties."
+      ]
+    },
+    "problem_solving": {
+      "title": "Problem solving and process improvement",
+      "texts": [
+        "Investigation and solution of quality problems concerning the product or process, such as defects or contamination. Our extensive experience helps us to identify the causes and find the most effective solutions."
+      ]
+    },
+    "quality_assurance": {
+      "title": "Quality assurance",
+      "texts": [
+        "Support in relationships and litigation with suppliers, customers or supervisory authorities.",
+        "Drafting and/or verification of legal compliance of labels.",
+        "Supplier audits for qualification, surveillance, or to investigate serious quality problems.",
+        "Personalized training courses, conducted with the participatory method, on quality, hygiene and safety of food and nutrition."
+      ] 
+    }
+  },
+  "team": {
+    "title": "About us",
+    "description": "We are a group of professionals who have held important technical and managerial roles in the food industry. We have worked mainly in the dairy, canned vegetables and beverages, ice cream, bakery products and in the formulation of various other functional products.",
+    "members": [
+      {
+        "name": "Diego Sambataro",
+        "image": "/assets/images/team/Diego.svg",
+        "alt": "Diego Profile",
+        "role": "Tecnologo alimentare"
+      },
+      {
+        "image": "/assets/images/team/Biagio.svg",
+        "alt": "Biagio Profile",
+        "name": "Biagio Calcavecchia",
+        "role": "Food Technologist"
+      }
+    ]  
+  },
+  "contact": {
+    "title": "Contacts",
+    
+    "name": "Name",
+    "message": "Message",
+    "email": "Email",
+    "submit": "Send us a message"
+  },
+  "story": {
+    "title": "Our history",
+
+    "timelines": [
+      [
+        "We got to know each other working together in a large and renowned Italian ice-cream company."
+      ],
+      [
+        "We decided to found Officina Alimentare to put our decades of experience at the service of small and medium companies that want to make a qualitative leap in production management, research and development and quality assurance."
+      ],
+      [
+        "We are increasingly focused on activities related to organic production, control of supply chains, Fair Trade, International Cooperation and high quality artisanal production with social impact."
+      ]
+    ]
+  },
+  "portfolio": {
+    "title": "They say about us"
+  },
+
+  "footer": {
+    "copyright": "© 2020 Officina Alimentare. All rights reserved.",
+    "title": "Officina Alimentare",
+    "texts": [
+      "Professional Associate Studio",
+      "P. IVA 05122760282"
+    ],
+    "contact": "Contacts",
+
+    "tel": {
+      "raw": "+393339141086",
+      "displayed": "+39 333 9141086"
+    },
+    "email": {
+      "raw": "info@officinalimentare.it",
+      "displayed": "info@officinalimentare.it"
+    }
+  }
+}

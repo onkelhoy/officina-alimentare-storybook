@@ -1,0 +1,152 @@
+{
+  "Component Template": {
+    "prefix": ["basic-component-template"],
+    "body": [
+      "import React from 'react';",
+      "import { createUseStyles } from 'react-jss';\n",
+
+      "// utils",
+      "import { IProps } from 'utils/Types';\n",
+
+      "export interface Props extends IProps {",
+      " ",
+      "}\n",
+
+      "export const $1: React.FC<Props> = (props) => {",
+      "  const classes = useStyles(props);\n",
+
+      "  return (",
+      "    <div className={[props.className, classes.root].join(' ')}>",
+      "      {props.children}",
+      "    </div>",
+      "  );",
+      "}\n",
+
+      "// types & interfaces",
+      "type RuleName = 'root';\n",
+
+      "// css design",
+      "const useStyles = createUseStyles<RuleName, Props, unknown>({",
+      "  root: {",
+      "    ",
+      "  },",
+      "});\n",
+
+      "// helper functions",
+    ],
+    "description": "Component basic structure."
+  },
+  "Component-CSSMedia Template": {
+    "prefix": ["basic-component-cssmedia-template"],
+    "body": [
+      "import React from 'react';",
+      "import { createUseStyles } from 'react-jss';\n",
+
+      "// utils",
+      "import { IProps } from 'utils/Types';",
+      "import { MediaSizes } from 'utils/Types';\n",
+
+      "export interface Props extends IProps{",
+      " ",
+      "}\n",
+
+      "export const $1: React.FC<Props> = (props) => {",
+      "  const classes = useStyles(props);\n",
+
+      "  return (",
+      "    <div className={[props.className, classes.root].join(' ')}>",
+      "      {props.children}",
+      "    </div>",
+      "  );",
+      "}\n",
+
+      "// types & interfaces",
+      "type RuleName = 'root' | MediaSizes;\n",
+
+      "// css design",
+      "const useStyles = createUseStyles<RuleName, Props, unknown>({",
+      "  root: {",
+      "    ",
+      "  },\n",
+
+      "  \"@media (max-width: 1200px)\": {",
+      "    // Size.DesktopMax",
+      "  }, ",
+      "  \"@media (max-width: 1024px)\": {",
+      "    // Size.LaptopMax",
+      "  }, ",
+      "  \"@media (max-width: 768px)\": {",
+      "    // Size.PadMax",
+      "  }, ",
+      "  \"@media (max-width: 480px)\": {",
+      "    // Size.MobileMax",
+      "  }",
+      "})\n",
+
+      "// helper functions",
+    ],
+    "description": "Component basic structure."
+  },
+  "Story Template": {
+    "prefix": "basic-story-template",
+    "body": [
+      "import React from 'react';",
+      "import { ComponentStory, ComponentMeta } from '@storybook/react';\n",
+
+      "import { $2 } from '.'\n",
+
+      "export default {",
+      "  title: '$1/$2',",
+      "  component: $2,",
+      "} as ComponentMeta<typeof $2>;\n",
+
+      "const Template: ComponentStory<typeof $2> = (args) => (",
+      "  <$2 {...args} />",
+      ");\n",
+
+      "export const Basic = Template.bind({});",
+      "Basic.args = {",
+      "  children: 'Basic $2',",
+      "};"
+    ],
+    "description": "Story item basic template"
+  },
+  "Atomic Imports": {
+    "prefix": "add-atomic-imports",
+    "body": [
+      "// Atoms ⚛️",
+      "import { Atom } from 'ux/atoms/Atom';\n",
+
+      "// Molecules *️⃣",
+      "import { Molecule } from 'ux/molecules/Molecule';\n",
+
+      "// Orgamisms 🫁",
+      "import { Orgamism } from 'ux/orgamisms/Orgamism';\n",
+    ],
+    "description": "Adds atomic import to file"
+  },
+  "Atom Imports": {
+    "prefix": "add-atom-import",
+    "body": [
+      "// Atoms ⚛️",
+      "import { $1 } from 'ux/atoms/$1';\n",
+    ],
+    "description": "Adds atomic import to file"
+  },
+  "Molecule Imports": {
+    "prefix": "add-molecule-import",
+    "body": [
+      "// Molecules *️⃣",
+      "import { $1 } from 'ux/molecules/$1';\n",
+    ],
+    "description": "Adds atomic import to file"
+  },
+  "Orgamism Imports": {
+    "prefix": "add-orgamism-import",
+    "body": [
+      "// Orgamisms 🫁",
+      "import { $1 } from 'ux/orgamisms/$1';\n",
+    ],
+    "description": "Adds atomic import to file"
+  }
+}

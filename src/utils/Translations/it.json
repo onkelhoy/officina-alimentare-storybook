@@ -1,0 +1,98 @@
+{
+  "header": {
+    "title": "Officina Alimentare",
+    "parts": {
+      "story": "Storia",
+      "service": "Servizi",
+      "team": "Su di noi",
+      "portfolio": "Dicono di noi",
+      "contact": "Contatti"
+    }
+  },
+  "service": {
+    "title": "Servizi",
+    "description": "…puntiamo dritti al cuore del problema, migliorare i prodotti, aumentare l’efficienza! Offriamo alle piccole e medie imprese la nostra pluriennale esperienza e competenza, per aiutarle a raggiungere livelli di eccellenza.",
+    "product_development": {
+      "title": "Sviluppo di nuovi prodotti",
+      "texts": [
+        "Supporto nello studio di nuovi prodotti, in ambito lattiero-caseario, conserve vegetali dolci e salate, prodotti speciali con claim nutrizionali, prodotti per la colazione, snack dolci e salati, bevande vegetali.",
+        "Ricerca e selezione di produttori in conto di terzi."
+      ]
+    },
+    "problem_solving": {
+      "title": "Soluzione di problemi e miglioramento dei processi",
+      "texts": [
+        "Attività investigativa e soluzione di problemi di qualità riguardanti il prodotto o il processo, come ad esempio difetti o contaminazioni. La nostra vasta esperienza ci aiuta a identificare le cause e trovare le soluzioni più efficaci."
+      ]
+    },
+    "quality_assurance": {
+      "title": "Garanzia della qualità",
+      "texts": [
+        "Supporto nei rapporti e nei contenziosi con fornitori, clienti o autorità di controllo.",
+        "Redazione e/o verifica della conformità legale delle etichette.",
+        "Audit dei fornitori per la qualifica, la sorveglianza o per indagare su gravi problemi di qualità.",
+        "Corsi di formazione personalizzati, condotti col metodo partecipativo, su qualità, igiene e sicurezza degli alimenti e dell’alimentazione."
+      ]
+    }
+  },
+  "team": {
+    "title": "Su di noi",
+    "description": "Siamo un gruppo di professionisti che hanno ricoperto importanti ruoli tecnici e manageriali nell’industria alimentare. Abbiamo lavorato principalmente nei settori lattiero caseario, delle conserve vegetali e delle bevande, dei gelati, dei prodotti da forno e nella formulazione di vari altri prodotti funzionali.",
+    "members": [
+      {
+        "image": "/assets/images/team/Diego.svg",
+        "alt": "Profilo Diego",
+        "name": "Diego Sambataro",
+        "role": "Tecnologo alimentare"
+      },
+      {
+        "image": "/assets/images/team/Biagio.svg",
+        "alt": "Profilo Biagio",
+        "name": "Biagio Calcavecchia",
+        "role": "Food Technologist"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contatti",
+
+    "name": "Nome",
+    "message": "Messaggio",
+    "email": "Email",
+    "submit": "Inviaci un messaggio"
+  },
+  "story": {
+    "title": "La nostra storia",
+
+    "timelines": [
+      [
+        "Ci siamo conosciuti lavorando insieme in una grande e rinomata azienda italiana di gelato."
+      ],
+      [
+        "Abbiamo deciso di fondare Officina Alimentare per mettere la nostra pluridecennale esperienza al servizio di aziende medio-piccole che desiderano fare un salto di qualità nella gestione della Produzione, della Ricerca&Sviluppo e dell’Assicurazione Qualità."
+      ],
+      [
+        "Siamo sempre più focalizzati sulle attività afferenti alla produzione biologica, al controllo delle filiere, al Fair Trade, alla Cooperazione Internazionale e alle produzioni artigianali di alta qualità con ricaduta sociale."
+      ]
+    ]
+  },
+  "portfolio": {
+    "title": "Dicono di noi"
+  },
+
+  "footer": {
+    "copyright": "© 2020 Officina Alimentare. Tutti i diritti riservati.",
+    "title": "Officina Alimentare",
+    "texts": ["Studio Professionale Associato", "P. IVA 05122760282"],
+    "contact": "Contatti",
+
+    "tel": {
+      "raw": "+393339141086",
+      "displayed": "+39 333 9141086"
+    },
+    "email": {
+      "raw": "info@officinalimentare.it",
+      "displayed": "info@officinalimentare.it"
+    }
+  }
+}
