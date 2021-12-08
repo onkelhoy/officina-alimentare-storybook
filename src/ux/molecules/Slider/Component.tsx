@@ -15,29 +15,66 @@ export interface Props extends IProps {
   source: string;
 }
 
+interface Size {
+  width: number;
+  height: number;
+}
+
 interface CSSProps {
   leftwidth: number;
+  panelsize: Size;
 }
 
 export const Slider: React.FC<Props> = (props) => {
   const [leftwidth, setLeftwidth] = React.useState(0);
-  const classes = useStyles({ leftwidth });
+  const [panelsize, setPanelSize] = React.useState<Size>({ width: 0, height: 0 });
+  
+  const timerRef = React.useRef<number>(0);
+  const ref = React.useRef<HTMLImageElement>(null);
+  const classes = useStyles({ leftwidth, panelsize });
 
   function onMove(x: number, _y: number) {
-    console.log('moving', x);
+    setLeftwidth(x);
+  }
+
+  function resize () {
+    if (ref.current) {
+      const box = ref.current.getBoundingClientRect();
+      setPanelSize({ width: box.width, height: box.height });
+    }
+  }
+
+  React.useEffect(() => {
+    init();
+    window.onresize = resize;
+
+    return () => {
+      window.onresize = null;
+    }
+  }, []);
+
+  function init() {
+    window.clearTimeout(timerRef.current);
+
+    timerRef.current = window.setTimeout(() => {
+      if (ref.current && panelsize.width === 0) {
+        resize();
+      }
+      else init();
+    }, 100);
   }
 
   return (
     <div className={[props.className, classes.root].join(' ')}>
       <div className={[classes.left, classes.panel].join(' ')}>
-        left
+        <Image draggable={false} src={props.source} alt="source" />
       </div>
       <Draggable onMove={onMove} freezeY className={classes.mover}>
         <span />
         <Image draggable={false} src={props.logo} width={100} height={100} alt="slider-mover" />
       </Draggable>
       <div className={[classes.right, classes.panel].join(' ')}>
-        right
+        <Image ref={ref} draggable={false} src={props.overlay} alt="overlay" />
       </div>
     </div>
   );
@@ -50,7 +87,7 @@ type RuleName = 'root'|'left'|'right'|'panel'|'mover';
 const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
   root: {
     width: '100%',
-    height: '100vh',
+    height: props => props.panelsize.height || '100vh',
 
     position: 'relative',
   },
@@ -63,7 +100,8 @@ const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
 
     '&:hover': {
       '& > span': {
-        transform: 'translateX(-50%) scaleX(2)',
+        backgroundColor: 'rgba(0,0,0, 0.2)',
+        transform: 'translateX(-50%) scaleX(1.2)',
       }
     },
 
@@ -77,8 +115,8 @@ const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
       zIndex: 2,
       top: 0,
       transform: 'translateX(-50%)',
-      transition: 'transform ease 80ms',
-      backgroundColor: 'orange',
+      transition: 'all ease 80ms',
+      backgroundColor: 'rgba(0,0,0, 0.1)',
     },
 
     '& > img': {
@@ -96,24 +134,27 @@ const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
     height: '100%',
     zIndex: 1,
     top: 0,
+    overflow: 'hidden',
+    backgroundColor: Color.White,
 
-    // STUB for dev purpose
-    color: 'white',
-    padding: '2rem',
-    textAlign: 'center',
-    boxSizing: 'border-box',
-    fontSize: '2rem',
+    '& > img': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+    }
   },
 
   left: {
-    backgroundColor: 'blue', // STUB
     left: 0,
     zIndex: 2,
-    width: props => props.leftwidth
+    width: props => `calc(${props.leftwidth}px + 2rem)`,
+
+    '& > img': {
+      width: props => props.panelsize.width,
+    }
   },
 
   right: {
-    backgroundColor: 'red', // STUB
     right: 0,
     zIndex: 1,
   }
