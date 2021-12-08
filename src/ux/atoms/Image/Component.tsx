@@ -33,10 +33,8 @@ export const Image = React.forwardRef<HTMLImageElement, Props & IProps>((props, 
   else
     return (
       <img
+        {...props}
         ref={ref}
-        src={props.src}
-        alt={props.alt}
-        className={props.className}
         width={props.width || "100%"}
         height={props.height || "auto"}
       />

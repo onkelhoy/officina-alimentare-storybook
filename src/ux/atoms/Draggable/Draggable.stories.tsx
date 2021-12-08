@@ -14,5 +14,31 @@ const Template: ComponentStory<typeof Draggable> = (args) => (
 
 export const Basic = Template.bind({});
 Basic.args = {
-  children: 'Basic Draggable',
+  style: {
+    width: '5rem',
+    height: '5rem',
+    color: 'white',
+    backgroundColor: 'orange',
+    textAlign: 'center',
+    lineHeight: '5rem', 
+    fontSize: '14pt',
+    borderRadius: '50%',
+  },
+  children: <div>DRAGGABLE</div>,
+};
+
+export const LockedX = Template.bind({});
+LockedX.args = {
+  freezeY: true,
+  style: {
+    width: '8rem',
+    height: '8rem',
+    color: 'white',
+    backgroundColor: 'cornflowerblue',
+    textAlign: 'center',
+    lineHeight: '5rem', 
+    fontSize: '14pt',
+    borderRadius: '50%',
+  },
+  children: <div>DRAGGABLE</div>,
 };

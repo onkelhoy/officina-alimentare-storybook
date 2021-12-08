@@ -5,6 +5,10 @@ import { Color } from 'utils/Enums';
 // utils
 import { IProps } from 'utils/Types';
 
+// Atoms ⚛️
+import { Image } from 'ux/atoms/Image';
+import { Draggable } from 'ux/atoms/Draggable';
+
 export interface Props extends IProps {
   overlay: string;
   logo: string;
@@ -13,7 +17,6 @@ export interface Props extends IProps {
 
 export const Slider: React.FC<Props> = (props) => {
   const classes = useStyles(props);
-  const moverRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     
@@ -27,9 +30,10 @@ export const Slider: React.FC<Props> = (props) => {
       <div className={[classes.left, classes.panel].join(' ')}>
         left
       </div>
-      <div ref={moverRef} className={classes.mover}>
-
-      </div>
+      <Draggable freezeY className={classes.mover}>
+        <span />
+        <Image draggable={false} src={props.logo} width={100} height={100} alt="slider-mover" />
+      </Draggable>
       <div className={[classes.right, classes.panel].join(' ')}>
         right
       </div>
@@ -50,23 +54,43 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
   },
 
   mover: {
-    position: 'absolute',
-    left: '50%',
-    top: 0,
     height: '100%',
-    width: '1rem',
+    width: '.8rem',
+
     zIndex: 2, 
-    backgroundColor: Color.Shadow,
-    transition: 'transform ease 80ms',
+    cursor: 'pointer',
 
     '&:hover': {
-      transform: 'translatescale(1.2)',
+      '& > span': {
+        transform: 'scaleX(2)',
+      }
+    },
+
+    '& > span': {
+      display: 'block',
+      content: '',
+      width: '100%', 
+      height: '100%',
+      position: 'absolute',
+      left: '0',
+      zIndex: 2,
+      top: 0,
+      transition: 'transform ease 80ms',
+      backgroundColor: 'orange',
+    },
+
+    '& > img': {
+      zIndex: 3,
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
     }
   },
 
   panel: {
     position: 'absolute',
-    width: '50%',
+    width: '100%',
     height: '100%',
     zIndex: 1,
     top: 0,
