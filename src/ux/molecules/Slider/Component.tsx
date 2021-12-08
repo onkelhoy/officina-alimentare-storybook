@@ -15,22 +15,24 @@ export interface Props extends IProps {
   source: string;
 }
 
+interface CSSProps {
+  leftwidth: number;
+}
+
 export const Slider: React.FC<Props> = (props) => {
-  const classes = useStyles(props);
+  const [leftwidth, setLeftwidth] = React.useState(0);
+  const classes = useStyles({ leftwidth });
 
-  React.useEffect(() => {
-    
-    return () => {
-
-    }
-  }, []);
+  function onMove(x: number, _y: number) {
+    console.log('moving', x);
+  }
 
   return (
     <div className={[props.className, classes.root].join(' ')}>
       <div className={[classes.left, classes.panel].join(' ')}>
         left
       </div>
-      <Draggable freezeY className={classes.mover}>
+      <Draggable onMove={onMove} freezeY className={classes.mover}>
         <span />
         <Image draggable={false} src={props.logo} width={100} height={100} alt="slider-mover" />
       </Draggable>
@@ -45,7 +47,7 @@ export const Slider: React.FC<Props> = (props) => {
 type RuleName = 'root'|'left'|'right'|'panel'|'mover';
 
 // css design
-const useStyles = createUseStyles<RuleName, Props, unknown>({
+const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
   root: {
     width: '100%',
     height: '100vh',
@@ -55,26 +57,26 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
 
   mover: {
     height: '100%',
-    width: '.8rem',
-
+    width: '4rem',
     zIndex: 2, 
     cursor: 'pointer',
 
     '&:hover': {
       '& > span': {
-        transform: 'scaleX(2)',
+        transform: 'translateX(-50%) scaleX(2)',
       }
     },
 
     '& > span': {
       display: 'block',
       content: '',
-      width: '100%', 
+      width: '.8rem',
       height: '100%',
       position: 'absolute',
-      left: '0',
+      left: '50%',
       zIndex: 2,
       top: 0,
+      transform: 'translateX(-50%)',
       transition: 'transform ease 80ms',
       backgroundColor: 'orange',
     },
@@ -106,11 +108,14 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
   left: {
     backgroundColor: 'blue', // STUB
     left: 0,
+    zIndex: 2,
+    width: props => props.leftwidth
   },
 
   right: {
     backgroundColor: 'red', // STUB
     right: 0,
+    zIndex: 1,
   }
 });
 

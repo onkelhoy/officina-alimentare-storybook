@@ -42,17 +42,16 @@ export const Draggable: React.FC<Props> = (props) => {
   // mouse functions
   function mousedown(ev: MouseEvent) {
     info.current.clicked = true;
-    const x = ev.pageX;
-    const y = ev.pageY;
+    const pos = getPosition(ev);
 
-    setOffset(x, y);
-    move(x, y);
+    setOffset(pos);
+    move(pos);
   }
 
   function mousemove(event: Event) {
-    const ev = event as MouseEvent;
     if (info.current.clicked) {
-      move(ev.pageX, ev.pageY);
+      const pos = getPosition(event as MouseEvent);
+      move(pos);
     }
   }
 
@@ -62,20 +61,18 @@ export const Draggable: React.FC<Props> = (props) => {
     info.current.touchindex = event.touches.length - 1;
 
     const touch = event.touches[info.current.touchindex];
-    const x = touch.pageX;
-    const y = touch.pageY;
+    const pos = getPosition(touch);
 
-    setOffset(x, y);
-    move(x, y);
+    setOffset(pos);
+    move(pos);
   }
 
   function touchmove (event: TouchEvent) {
     if (info.current.clicked) {
       if (typeof info.current.touchindex === "number") {
         const touch = event.touches[info.current.touchindex];
-        const x = touch.pageX;
-        const y = touch.pageY;
-        move(x, y);
+        const pos = getPosition(touch);
+        move(pos);
       }
     }
   }
@@ -91,37 +88,45 @@ export const Draggable: React.FC<Props> = (props) => {
     }
   }
 
-  function setOffset(x:number, y:number) {
+  function getPosition(event: MouseEvent | Touch): Position {
+    const x = event.pageX;
+    const y = event.pageY;
+
+    return { x, y };
+  }
+
+  function setOffset(pos: Position) {
     if (ref.current) {
       const box = ref.current.getBoundingClientRect();
 
-      info.current.offset.x = box.x - x;
-      info.current.offset.y = box.y - y;
+      info.current.offset.x = box.x - pos.x;
+      info.current.offset.y = box.y - pos.y;
     }
   }
 
-  function move(x:number, y:number) {
+  function move(pos: Position) {
+    const { x, y } = pos;
+
     if (ref.current) {
       const parentBoundary = ref.current.parentElement?.getBoundingClientRect();
       const boundary = ref.current.getBoundingClientRect();
 
       if (parentBoundary) {
         const pos: Position = { 
-          x: x + info.current.offset.x, 
-          y: y + info.current.offset.y,
+          x: x + info.current.offset.x - parentBoundary.x, 
+          y: y + info.current.offset.y - parentBoundary.y,
         };
 
         if (!props.freezeY) {
-          if (pos.y < parentBoundary.y) pos.y = parentBoundary.y;
-          if (pos.y > (parentBoundary.y + parentBoundary.height)) pos.y = parentBoundary.y + parentBoundary.height;
+          if (pos.y < 0) pos.y = 0;
+          if (pos.y + boundary.height > parentBoundary.height) pos.y = parentBoundary.height - boundary.height;
         }
-        
+
         if (!props.freezeX) {
-          if (pos.x < parentBoundary.x) pos.x = parentBoundary.x;
-          if (pos.x > (parentBoundary.x + parentBoundary.width)) pos.x = parentBoundary.x + parentBoundary.width;
+          if (pos.x < 0) pos.x = 0;
+          if (pos.x + boundary.width > parentBoundary.width) pos.x = parentBoundary.width - boundary.width;
         }
         
-        console.log({parentBoundary, pos, boundary});
         setPosition(pos);
         if (props.onMove) props.onMove(pos.x, pos.y)
       }
@@ -202,8 +207,8 @@ type RuleName = 'root';
 const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
   root: {
     position: 'absolute',
-    left: props => props.x ? props.pos.x + 'px' : '',
-    top: props => props.y ? props.pos.y + 'px' : '',
+    left: props => props.x ? props.pos.x : '',
+    top: props => props.y ? props.pos.y : '',
   }
 });
 

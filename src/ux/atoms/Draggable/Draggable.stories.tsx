@@ -6,6 +6,18 @@ import { Draggable } from '.'
 export default {
   title: 'atoms/Draggable',
   component: Draggable,
+  decorators: [
+    (Story) => (
+      <div style={{ 
+        height: '20rem', 
+        margin: '5rem',
+        position: 'relative', 
+        outline: '2px solid red' 
+      }}>
+        <Story />
+      </div>
+    ),
+  ],
 } as ComponentMeta<typeof Draggable>;
 
 const Template: ComponentStory<typeof Draggable> = (args) => (
