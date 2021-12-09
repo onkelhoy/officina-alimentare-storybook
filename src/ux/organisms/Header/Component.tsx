@@ -71,7 +71,7 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
     top: 0,
     left: 0,
     height: '4rem',
-    zIndex: 2,
+    zIndex: 10,
   },
 
   "@media (max-width: 480px)": {

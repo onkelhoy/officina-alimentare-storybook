@@ -4,13 +4,13 @@ import { createUseStyles } from 'react-jss';
 // utils
 import { IProps } from 'utils/Types';
 
-interface Position {
-  x: number;
-  y: number;
+interface Position<T = number> {
+  x: T;
+  y: T;
 }
 
 interface Props extends IProps<HTMLDivElement> {
-  startPosition?: Position;
+  startPosition?: Position<string>;
   freezeX?: Boolean,
   freezeY?: Boolean,
 
@@ -18,7 +18,7 @@ interface Props extends IProps<HTMLDivElement> {
 }
 
 interface CSSProps {
-  pos: Position;
+  pos: Position<string|number>;
   x: Boolean,
   y: Boolean;
 }
@@ -31,7 +31,7 @@ export const Draggable: React.FC<Props> = (props) => {
     clicked: false,
   });
 
-  const [position, setPosition] = React.useState<Position>({ x: 0, y: 0 })
+  const [position, setPosition] = React.useState<Position<string|number>>({ x: 0, y: 0 })
   const classes = useStyles({ 
     pos: position, 
     x: !props.freezeX, 

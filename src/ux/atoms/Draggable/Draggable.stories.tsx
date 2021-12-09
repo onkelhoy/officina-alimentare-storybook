@@ -36,21 +36,17 @@ Basic.args = {
     fontSize: '14pt',
     borderRadius: '50%',
   },
+  startPosition: { x: '50%', y: '0' },
   children: <div>DRAGGABLE</div>,
 };
 
 export const LockedX = Template.bind({});
 LockedX.args = {
   freezeY: true,
+  startPosition: { x: 'calc(50% - 2.5rem)', y: '0' },
   style: {
-    width: '8rem',
-    height: '8rem',
-    color: 'white',
+    ...Basic.args.style,
     backgroundColor: 'cornflowerblue',
-    textAlign: 'center',
-    lineHeight: '5rem', 
-    fontSize: '14pt',
-    borderRadius: '50%',
   },
   children: <div>DRAGGABLE</div>,
 };

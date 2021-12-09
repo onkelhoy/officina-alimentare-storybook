@@ -24,19 +24,19 @@ export const Home: React.FC<Props> = (props) => {
 
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       <Slider 
         source='/assets/images/slider/source.svg'
         overlay='/assets/images/slider/overlay.svg'
         logo='/assets/images/slider/logo.svg'
       />
-      {/* <Container className={classes.root} direction="column">
+      <Container className={classes.root} direction="column">
         <Services />
         <Teams />
         <Stories />
         <Portfolios />
       </Container>
-      <Footer /> */}
+      <Footer />
     </div>
   );
 }

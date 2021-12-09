@@ -69,7 +69,12 @@ export const Slider: React.FC<Props> = (props) => {
       <div className={[classes.left, classes.panel].join(' ')}>
         <Image draggable={false} src={props.source} alt="source" />
       </div>
-      <Draggable onMove={onMove} freezeY className={classes.mover}>
+      <Draggable 
+        onMove={onMove} 
+        startPosition={{ x: 'calc(50% - 2.5rem)', y: '0' }}
+        freezeY 
+        className={classes.mover}
+      >
         <span />
         <Image draggable={false} src={props.logo} width={100} height={100} alt="slider-mover" />
       </Draggable>
