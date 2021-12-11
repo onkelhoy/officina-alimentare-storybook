@@ -18,7 +18,7 @@ export const Image = React.forwardRef<HTMLImageElement, Props & IProps>((props, 
   const [loading, setLoading] = React.useState<boolean>(true);
 
   let { src } = props;
-  if (location.host === "onkelhoy.github.io") {
+  if (window.location.host === "onkelhoy.github.io") {
     let slash = src[0] === '/' ? '' : '/';
     src = `/officina_alimentare_atomic${slash}${src}`
   }
@@ -43,6 +43,7 @@ export const Image = React.forwardRef<HTMLImageElement, Props & IProps>((props, 
     return (
       <img
         {...rest}
+        src={src}
         className={[className, "henry-image"].join(" ")}
         ref={ref}
         width={props.width || "100%"}
