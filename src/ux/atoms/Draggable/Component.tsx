@@ -133,6 +133,7 @@ export const Draggable: React.FC<Props> = (props) => {
     }
   }
 
+  // cleans events 
   React.useEffect(() => {
     setPosition({ x: props.startPosition?.x || 0, y: props.startPosition?.y || 0 });
 
@@ -156,6 +157,7 @@ export const Draggable: React.FC<Props> = (props) => {
     }
   }, []);
 
+  // adds & cleans events 
   React.useEffect(() => {
     if (!ref.current) return;
     if (!ref.current.parentNode) throw new Error('[DOM] Draggable needs parentNode');
@@ -190,7 +192,7 @@ export const Draggable: React.FC<Props> = (props) => {
     }
   }, [ref.current]);
 
-  const { startPosition, className, ...rest } = props;
+  const { startPosition, className, onMove, freezeY, freezeX, ...rest } = props;
   return (
     <div
       ref={ref}

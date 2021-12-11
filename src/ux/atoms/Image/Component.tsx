@@ -10,6 +10,7 @@ interface Props extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'onLoad'
 
   onLoad?: (event: Event) => void;
   placeholderHeight?: number;
+  placeholderWidth?: number;
 }
 
 
@@ -23,17 +24,21 @@ export const Image = React.forwardRef<HTMLImageElement, Props & IProps>((props, 
     if (props.onLoad) props.onLoad(e);
   }
 
+  const { placeholderWidth, placeholderHeight, className, ...rest } = props;
+
   if (loading)
     return (
       <Skeleton
-        width={props.width || "100%"}
-        height={props.placeholderHeight || props.height || "auto"}
+        className={[className, "henry-image"].join(" ")}
+        width={placeholderWidth || props.width || "100%"}
+        height={placeholderHeight || props.height || "auto"}
       />
     );
   else
     return (
       <img
-        {...props}
+        {...rest}
+        className={[className, "henry-image"].join(" ")}
         ref={ref}
         width={props.width || "100%"}
         height={props.height || "auto"}

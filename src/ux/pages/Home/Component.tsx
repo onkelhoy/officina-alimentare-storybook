@@ -25,6 +25,8 @@ export const Home: React.FC<Props> = (props) => {
   return (
     <div>
       <Header />
+      <br />
+      <br />
       <Slider 
         source='/assets/images/slider/source.svg'
         overlay='/assets/images/slider/overlay.svg'

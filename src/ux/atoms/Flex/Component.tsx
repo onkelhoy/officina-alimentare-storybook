@@ -15,7 +15,7 @@ export const Flex: React.FC<Props> = (props) => {
   const classes = useStyles(props);
 
   return (
-    <div style={props.style} className={[props.className, classes.root].join(' ')}>
+    <div style={props.style} className={["flex", props.className, classes.root].join(' ')}>
       {props.children}
     </div>
   );

@@ -7,6 +7,7 @@ import { IProps } from 'utils/Types';
 
 // Atoms ⚛️
 import { Image } from 'ux/atoms/Image';
+import { Flex } from 'ux/atoms/Flex';
 import { Draggable } from 'ux/atoms/Draggable';
 
 export interface Props extends IProps {
@@ -31,6 +32,7 @@ export const Slider: React.FC<Props> = (props) => {
   
   const timerRef = React.useRef<number>(0);
   const ref = React.useRef<HTMLImageElement>(null);
+  const isfirst = React.useRef<boolean>(true);
   const classes = useStyles({ leftwidth, panelsize });
 
   function onMove(x: number, _y: number) {
@@ -41,6 +43,11 @@ export const Slider: React.FC<Props> = (props) => {
     if (ref.current) {
       const box = ref.current.getBoundingClientRect();
       setPanelSize({ width: box.width, height: box.height });
+
+      if (isfirst.current) {
+        setLeftwidth(box.width / 2);
+        isfirst.current = false;
+      }
     }
   }
 
@@ -67,19 +74,23 @@ export const Slider: React.FC<Props> = (props) => {
   return (
     <div className={[props.className, classes.root].join(' ')}>
       <div className={[classes.left, classes.panel].join(' ')}>
-        <Image draggable={false} src={props.source} alt="source" />
+        <Image className="noselect" draggable={false} src={props.source} alt="source" />
       </div>
       <Draggable 
         onMove={onMove} 
-        startPosition={{ x: 'calc(50% - 2.5rem)', y: '0' }}
+        startPosition={{ x: '50%', y: '0' }}
         freezeY 
         className={classes.mover}
       >
-        <span />
-        <Image draggable={false} src={props.logo} width={100} height={100} alt="slider-mover" />
+        <Flex justifyContent="center" alignItems="center" className={[props.className, classes.root].join(' ')}>
+          <span className="beam" />
+          <span className="image">
+            <Image className="noselect" draggable={false} src={props.logo} width={100} height={100} alt="slider-mover" />
+          </span>
+        </Flex>
       </Draggable>
       <div className={[classes.right, classes.panel].join(' ')}>
-        <Image ref={ref} draggable={false} src={props.overlay} alt="overlay" />
+        <Image className="noselect" ref={ref} draggable={false} src={props.overlay} alt="overlay" />
       </div>
     </div>
   );
@@ -89,6 +100,7 @@ export const Slider: React.FC<Props> = (props) => {
 type RuleName = 'root'|'left'|'right'|'panel'|'mover';
 
 // css design
+
 const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
   root: {
     width: '100%',
@@ -104,32 +116,52 @@ const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
     cursor: 'pointer',
 
     '&:hover': {
-      '& > span': {
-        backgroundColor: 'rgba(0,0,0, 0.2)',
-        transform: 'translateX(-50%) scaleX(1.2)',
+      '& .flex > span.beam': {
+        backgroundColor: 'rgba(0,0,0, 0.9)',
+        transform: 'translate(-50%, -50%) scaleX(1.2)',
       }
     },
 
-    '& > span': {
-      display: 'block',
-      content: '',
-      width: '.8rem',
-      height: '100%',
-      position: 'absolute',
-      left: '50%',
-      zIndex: 2,
-      top: 0,
-      transform: 'translateX(-50%)',
-      transition: 'all ease 80ms',
-      backgroundColor: 'rgba(0,0,0, 0.1)',
-    },
+    "& .flex": {
+      position: 'relative',
 
-    '& > img': {
-      zIndex: 3,
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
+      '&>span.beam': {
+        display: 'block',
+        content: '',
+        width: '6px',
+        height: '100%',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        zIndex: 2,
+        transform: 'translate(-50%, -50%)',
+        transition: 'all ease 80ms',
+        backgroundColor: 'rgba(0,0,0, 0.5)',
+      },
+      '&>span.image': {
+        zIndex: 3,
+        height: 100,
+        position: "relative",
+
+        '&::before': {
+          content: '""',
+          position: "absolute",
+          left: 0,
+          top: 0,
+          width: "50%",
+          height: "100%",
+          cursor: "w-resize"
+        },
+        '&::after': {
+          content: '""',
+          position: "absolute",
+          right: 0,
+          top: 0,
+          width: "50%",
+          height: "100%",
+          cursor: "e-resize"
+        }
+      },
     }
   },
 

@@ -36,7 +36,7 @@ export const Scrollpass: React.FC<Props> = (props) => {
   };
 
   return (
-    <div ref={ref} className={[props.className, classes.root].join(' ')}>
+    <div style={props.style} ref={ref} className={[props.className, classes.root].join(' ')}>
       {props.children(passed)}
     </div>
   );
