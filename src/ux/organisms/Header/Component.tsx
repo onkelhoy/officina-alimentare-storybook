@@ -3,8 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { createUseStyles } from 'react-jss';
 
 // utils
-import { IProps } from 'utils/Types';
-import { MediaMobile } from 'utils/Types';
+import { MediaMobile, MediaPad, IProps } from 'utils/Types';
+import { Color, Size } from 'utils/Enums';
+import { useSize } from 'utils/Hooks';
 
 // Atoms ⚛️
 import { Grid } from 'ux/atoms/Grid';
@@ -21,9 +22,12 @@ export interface Props extends IProps {
 }
 
 export const Header: React.FC<Props> = (props) => {
+  const rootsize = useSize();
   const classes = useStyles(props);
   const { t } = useTranslation();
   const links = ["service", "team", "story", "portfolio"];
+
+  const smallscreen = rootsize.width < Size.PadMax;
 
   return (
     <Scrollpass 
@@ -44,13 +48,11 @@ export const Header: React.FC<Props> = (props) => {
         >
           <Flex alignItems="center">
             <Link href="#" passive>
-              <Typography variant="logo">
-                  {t("header.title")}
-              </Typography>
+              <Typography light={smallscreen} variant="logo">{t("header.title")}</Typography>
             </Link>
           </Flex>
           <Flex alignItems="center" justifyContent="space-between">
-            {links.map(link => <Link key={link} href={`#${link}`}>{t(`header.parts.${link}`)}</Link>)}
+            {links.map(link => <Link color={smallscreen ? Color.BodyTextLight : Color.BodyText} key={link} href={`#${link}`}>{t(`header.parts.${link}`)}</Link>)}
             <Flex style={{ marginTop: 7 }} alignItems="center" justifyContent="space-between">
               <Language prefix="it" />
               <Language prefix="en" marginLeft={5} />
@@ -63,7 +65,7 @@ export const Header: React.FC<Props> = (props) => {
 }
 
 // types & interfaces
-type RuleName = 'root' | MediaMobile;
+type RuleName = 'root' | MediaMobile | MediaPad;
 
 // css design
 const useStyles = createUseStyles<RuleName, Props, unknown>({
@@ -73,8 +75,15 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
     left: 0,
     height: '4rem',
     zIndex: 10,
+    transition: 'background-color 120ms ease-out',
   },
 
+  "@media (max-width: 768px)": {
+    // Size.PadMax
+    root: {
+      backgroundColor: Color.HeaderBlack
+    }
+  }, 
   "@media (max-width: 480px)": {
     // Size.MobileMax
   }

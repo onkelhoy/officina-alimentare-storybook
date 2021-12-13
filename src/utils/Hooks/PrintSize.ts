@@ -1,7 +1,7 @@
-import useSize from './Size';
+import { useMediaSize } from './MediaSize';
 
-export default function usePrintSize(...params: number[]): string {
-  const [_compare, block] = useSize();
+export function usePrintSize(...params: number[]): string {
+  const [_compare, block] = useMediaSize();
 
   return params.map(n => `${n * block.unit}rem`).join();
 }

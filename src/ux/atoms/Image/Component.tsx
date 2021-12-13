@@ -24,8 +24,6 @@ export const Image = React.forwardRef<HTMLImageElement, Props & IProps>((props, 
     console.log({ slash, src });
   }
 
-  console.log('src is', src);
-  
   const image = new window.Image();
   image.src = src;
   image.onload = (e) => {

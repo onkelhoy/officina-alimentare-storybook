@@ -1,8 +1,20 @@
 import { MediaDevices, MediaCompare } from 'utils/Enums';
-import useSize from './Size';
+import { useMediaSize } from './MediaSize';
 
-export default function useMediaQuery(device: MediaDevices, compare: MediaCompare) {
-  const [_compare, block] = useSize();
+export function useMediaQuery(device: MediaDevices, compare: MediaCompare) {
+  const [_compare, block] = useMediaSize();
 
-  return block.device === device && _compare === compare;
+  if (block.device !== device) {
+    if (compare === MediaCompare.Smaller) {
+      return device > block.device;
+    }
+    if (compare === MediaCompare.Bigger) {
+      return device < block.device;
+    }
+  }
+  else {
+    return _compare === MediaCompare.Between;
+  }
+
+  return false;
 }

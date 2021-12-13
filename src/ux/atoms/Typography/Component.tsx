@@ -10,6 +10,7 @@ export interface Props extends Omit<IProps, 'size'> {
   align?: 'center'|'left'|'right'|'justify';
   color?: Color;
   size?: 'small'|'smaller';
+  light?: Boolean;
 }
 
 export const Typography: React.FC<Props> = (props) => {
@@ -58,7 +59,7 @@ export const Typography: React.FC<Props> = (props) => {
 const useStyles = createUseStyles<RuleName, Props, unknown>({
   root: props => ({
     textAlign: props.align,
-    color: props.color,
+    color: props.light ? Color.White : props.color,
     fontSize: props.size,
   }),
 
@@ -66,7 +67,7 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
     fontSize: '1rem',
     fontWeight: 400,
     lineHeight: 1.5,
-    color: Color.BodyText,
+    color: props => props.light ? Color.BodyTextLight : Color.BodyText,
   },
 
   logo: {

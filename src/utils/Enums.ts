@@ -17,26 +17,28 @@ export enum Color {
   Blue = 'rgb(22, 74, 245)',
 
   BodyText = '#6c757d',
+  BodyTextLight = '#dce7f1',
 
   Dark = 'rgb(7, 23, 78)',
   Darker = 'rgb(5, 16, 54)',
   Shadow = 'rgba(0, 0, 0, 0.15)',
   Glow = 'rgb(235, 235, 235)',
   Footer = 'black',
+  HeaderBlack = "rgba(0,0,0,0.85)",
   Transparent = 'transparent',
   TransparentWhite = 'rgba(255, 255, 255, 0.85)',
 }
 
 // ===== Media =============
 export enum MediaDevices {
-  Mobile = 'mobile',
-  Pad = 'pad',
-  Laptop = 'laptop',
-  Desktop = 'desktop'
+  Mobile = 0,
+  Pad = 1,
+  Laptop = 2,
+  Desktop = 3
 }
 
 export enum MediaCompare {
-  Between,
-  Smaller,
-  Bigger
+  Between = 'between',
+  Smaller = 'smaller',
+  Bigger = 'bigger'
 }

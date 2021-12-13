@@ -4,13 +4,13 @@ import { createUseStyles } from 'react-jss';
 
 // utils
 import { IProps, Languages } from 'utils/Types';
+import { Color } from 'utils/Enums';
 
 import { AppContext } from 'AppContext';
 
 // Atoms ⚛️
 import { Button } from 'ux/atoms/Button';
 import { Image } from 'ux/atoms/Image';
-import { Color } from 'utils/Enums';
 
 export interface Props extends IProps {
   prefix: Languages;
@@ -38,14 +38,14 @@ export const Language: React.FC<Props> = (props) => {
       onMouseOver={doHover(true)}
       onMouseLeave={doHover(false)}
     >
-      {!hover && <Image src={`/assets/images/flags/${props.prefix}.BW.svg`} alt={`Language-${props.prefix}`} />}
-      {hover && <Image src={`/assets/images/flags/${props.prefix}.C.svg`} alt={`Language-${props.prefix}`} />}
+      {!hover && <Image className={classes.image} src={`/assets/images/flags/${props.prefix}.BW.svg`} alt={`Language-${props.prefix}`} />}
+      {hover && <Image className={classes.image} src={`/assets/images/flags/${props.prefix}.C.svg`} alt={`Language-${props.prefix}`} />}
     </Button>
   );
 }
 
 // types & interfaces
-type RuleName = 'root';
+type RuleName = 'root' | 'image';
 interface CSSProps extends Props {
   current: Languages;
 }
@@ -56,7 +56,11 @@ const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
     width: 20,
     marginLeft: props.marginLeft,
     borderBottom: `2px solid ${props.current === props.prefix ? Color.Shadow : Color.Transparent}`,
-  })
+  }),
+
+  image: {
+    backgroundColor: Color.White,
+  }
 });
 
 // helper functions
