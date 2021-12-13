@@ -6,7 +6,6 @@ import { MediaSizes } from 'utils/Types';
 // Molecules *️⃣
 import { Container } from 'ux/molecules/Container';
 import { Footer } from 'ux/molecules/Footer';
-import { Slider } from 'ux/molecules/Slider';
 
 // Orgamisms 🫁
 import { Services } from 'ux/organisms/Services';
@@ -14,6 +13,7 @@ import { Teams } from 'ux/organisms/Teams';
 import { Stories } from 'ux/organisms/Stories';
 import { Portfolios } from 'ux/organisms/Portfolios';
 import { Header } from 'ux/organisms/Header';
+import { Slider } from 'ux/organisms/Slider';
 
 export interface Props {
  

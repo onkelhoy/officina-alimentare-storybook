@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Slider } from '.'
 
 export default {
-  title: 'molecules/Slider',
+  title: 'organisms/Slider',
   component: Slider,
   decorators: [
     (Story) => (

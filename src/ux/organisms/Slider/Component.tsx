@@ -7,8 +7,10 @@ import { IProps } from 'utils/Types';
 
 // Atoms ⚛️
 import { Image } from 'ux/atoms/Image';
-import { Flex } from 'ux/atoms/Flex';
-import { Draggable } from 'ux/atoms/Draggable';
+
+// Molecules *️⃣
+import { Knob } from 'ux/molecules/Knob';
+
 
 export interface Props extends IProps {
   overlay: string;
@@ -76,19 +78,7 @@ export const Slider: React.FC<Props> = (props) => {
       <div className={[classes.left, classes.panel].join(' ')}>
         <Image className="noselect" draggable={false} src={props.source} alt="source" />
       </div>
-      <Draggable 
-        onMove={onMove} 
-        startPosition={{ x: '50%', y: '0' }}
-        freezeY 
-        className={classes.mover}
-      >
-        <Flex justifyContent="center" alignItems="center" className={[props.className, classes.root].join(' ')}>
-          <span className="beam" />
-          <span className="image">
-            <Image className="noselect" draggable={false} src={props.logo} width={100} height={100} alt="slider-mover" />
-          </span>
-        </Flex>
-      </Draggable>
+      <Knob src="/assets/images/slider/logo.svg" onMove={onMove} />
       <div className={[classes.right, classes.panel].join(' ')}>
         <Image className="noselect" ref={ref} draggable={false} src={props.overlay} alt="overlay" />
       </div>
@@ -97,7 +87,7 @@ export const Slider: React.FC<Props> = (props) => {
 }
 
 // types & interfaces
-type RuleName = 'root'|'left'|'right'|'panel'|'mover';
+type RuleName = 'root'|'left'|'right'|'panel';
 
 // css design
 
@@ -107,62 +97,6 @@ const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
     height: props => props.panelsize.height || '100vh',
 
     position: 'relative',
-  },
-
-  mover: {
-    height: '100%',
-    width: '4rem',
-    zIndex: 2, 
-    cursor: 'pointer',
-
-    '&:hover': {
-      '& .flex > span.beam': {
-        backgroundColor: 'rgba(0,0,0, 0.9)',
-        transform: 'translate(-50%, -50%) scaleX(1.2)',
-      }
-    },
-
-    "& .flex": {
-      position: 'relative',
-
-      '&>span.beam': {
-        display: 'block',
-        content: '',
-        width: '6px',
-        height: '100%',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        zIndex: 2,
-        transform: 'translate(-50%, -50%)',
-        transition: 'all ease 80ms',
-        backgroundColor: 'rgba(0,0,0, 0.5)',
-      },
-      '&>span.image': {
-        zIndex: 3,
-        height: 100,
-        position: "relative",
-
-        '&::before': {
-          content: '""',
-          position: "absolute",
-          left: 0,
-          top: 0,
-          width: "50%",
-          height: "100%",
-          cursor: "w-resize"
-        },
-        '&::after': {
-          content: '""',
-          position: "absolute",
-          right: 0,
-          top: 0,
-          width: "50%",
-          height: "100%",
-          cursor: "e-resize"
-        }
-      },
-    }
   },
 
   panel: {
