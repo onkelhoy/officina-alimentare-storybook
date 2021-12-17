@@ -1,12 +1,14 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
-import { Color } from 'utils/Enums';
 
 // utils
 import { IProps } from 'utils/Types';
+import { useMediaSize, useSize } from 'utils/Hooks';
+import { Color, Size } from 'utils/Enums';
 
 // Atoms ⚛️
 import { Image } from 'ux/atoms/Image';
+import { Draggable } from 'ux/atoms/Draggable';
 
 // Molecules *️⃣
 import { Knob } from 'ux/molecules/Knob';
@@ -18,27 +20,28 @@ export interface Props extends IProps {
   source: string;
 }
 
-interface Size {
+interface Dimensions {
   width: number;
   height: number;
 }
 
 interface CSSProps {
-  leftwidth: number;
-  panelsize: Size;
+  size: Dimensions;
+  panelsize: Dimensions;
+  smallscreen: boolean;
 }
 
 export const Slider: React.FC<Props> = (props) => {
-  const [leftwidth, setLeftwidth] = React.useState(0);
-  const [panelsize, setPanelSize] = React.useState<Size>({ width: 0, height: 0 });
+  const rootsize = useSize();
+  const [size, setSize] = React.useState<Dimensions>({ width: 0, height: 0 });
+  const [panelsize, setPanelSize] = React.useState<Dimensions>({ width: 0, height: 0 });
+  const [smallscreen, setSmallscreen] = React.useState<boolean>(window.innerWidth < Size.PadMax);
   
-  const timerRef = React.useRef<number>(0);
   const ref = React.useRef<HTMLImageElement>(null);
-  const isfirst = React.useRef<boolean>(true);
-  const classes = useStyles({ leftwidth, panelsize });
+  const classes = useStyles({ size, panelsize, smallscreen });
 
-  function onMove(x: number, _y: number) {
-    setLeftwidth(x);
+  function onmove(x: number, y: number) {
+    setSize({ height: y, width: x });
   }
 
   function resize () {
@@ -46,15 +49,12 @@ export const Slider: React.FC<Props> = (props) => {
       const box = ref.current.getBoundingClientRect();
       setPanelSize({ width: box.width, height: box.height });
 
-      if (isfirst.current) {
-        setLeftwidth(box.width / 2);
-        isfirst.current = false;
-      }
+      if (rootsize.width < Size.PadMax) setSize({ width: 0, height: box.height / 2});
+      else setSize({width: box.width / 2, height: 0 });
     }
   }
 
   React.useEffect(() => {
-    init();
     window.onresize = resize;
 
     return () => {
@@ -62,23 +62,32 @@ export const Slider: React.FC<Props> = (props) => {
     }
   }, []);
 
-  function init() {
-    window.clearTimeout(timerRef.current);
+  React.useEffect(() => {
+    const sm = rootsize.width < Size.PadMax;
 
-    timerRef.current = window.setTimeout(() => {
-      if (ref.current && panelsize.width === 0) {
-        resize();
-      }
-      else init();
-    }, 100);
-  }
-
+    if (!smallscreen && sm || smallscreen && !sm) {
+      setSmallscreen(sm);
+      resize();
+    } 
+  }, [rootsize.width]);
+  
   return (
     <div className={[props.className, classes.root].join(' ')}>
       <div className={[classes.left, classes.panel].join(' ')}>
         <Image className="noselect" draggable={false} src={props.source} alt="source" />
       </div>
-      <Knob src="/assets/images/slider/logo.svg" onMove={onMove} />
+      <Draggable 
+        onMove={onmove} 
+        startPosition={{ x: '50%', y: '50%' }}
+        freezeY={!smallscreen} 
+        freezeX={smallscreen}
+        className={classes.drag}
+      >
+        <Knob 
+          flipped={smallscreen} 
+          src="/assets/images/slider/logo.svg" 
+        />
+      </Draggable>
       <div className={[classes.right, classes.panel].join(' ')}>
         <Image className="noselect" ref={ref} draggable={false} src={props.overlay} alt="overlay" />
       </div>
@@ -87,7 +96,7 @@ export const Slider: React.FC<Props> = (props) => {
 }
 
 // types & interfaces
-type RuleName = 'root'|'left'|'right'|'panel';
+type RuleName = 'root'|'left'|'right'|'panel'|'drag';
 
 // css design
 
@@ -97,6 +106,13 @@ const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
     height: props => props.panelsize.height || '100vh',
 
     position: 'relative',
+  },
+
+  drag: {
+    width: props => props.smallscreen ? '100%' : '4rem',
+    height: props => props.smallscreen ? '4rem' : '100%',
+    zIndex: 2, 
+    cursor: 'pointer',
   },
 
   panel: {
@@ -115,13 +131,19 @@ const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
     }
   },
 
-  left: {
-    left: 0,
-    zIndex: 2,
-    width: props => `calc(${props.leftwidth}px + 2rem)`,
+  left: props => {
+    const w = `calc(${props.size.width}px + 2rem)`;
+    const h = `calc(${props.size.height}px + 2rem)`;
 
-    '& > img': {
-      width: props => props.panelsize.width,
+    return {
+      left: 0,
+      zIndex: 2,
+      width: props.smallscreen ? '100%' : w,
+      height: props.smallscreen ? h : '100%',
+  
+      '& > img': {
+        width: props.panelsize.width,
+      }
     }
   },
 

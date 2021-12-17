@@ -4,7 +4,7 @@ import { MediaDevices, MediaCompare } from 'utils/Enums';
 import { Media } from 'utils/Constants';
 import { IMediaBlock } from 'utils/Types';
 
-import { useSize } from './Size';
+import { useSize } from './HSize';
 
 export function useMediaSize (): [MediaCompare, IMediaBlock]  {
   const rootsize = useSize(); // will go for root

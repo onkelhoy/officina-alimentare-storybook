@@ -31,7 +31,7 @@ export const Draggable: React.FC<Props> = (props) => {
     clicked: false,
   });
 
-  const [position, setPosition] = React.useState<Position<string|number>>({ x: 0, y: 0 })
+  const [position, setPosition] = React.useState<Position<string|number>>({ x: props.startPosition?.x || 0, y: props.startPosition?.y || 0 })
   const classes = useStyles({ 
     pos: position, 
     x: !props.freezeX, 
@@ -128,7 +128,7 @@ export const Draggable: React.FC<Props> = (props) => {
         }
         
         setPosition(pos);
-        if (props.onMove) props.onMove(pos.x, pos.y)
+        if (props.onMove) props.onMove(pos.x, pos.y);
       }
     }
   }

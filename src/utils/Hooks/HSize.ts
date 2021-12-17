@@ -8,7 +8,7 @@ export function useSize (ref?: Element): ISize  {
   const [size, setSize] = React.useState<ISize>({ width: 0, height: 0 });
   const ro: ResizeObserver = new ResizeObserver(entries => {
     const [target] = entries; // always 1 element
-    setSize(target.contentRect)
+    setSize(target.contentRect);
   });
 
   React.useEffect(() => {
