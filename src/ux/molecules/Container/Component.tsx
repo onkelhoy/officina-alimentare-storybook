@@ -33,28 +33,28 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
     transition: 'all .3s ease-out'
   },
 
-  "@media (max-width: 1200px)": {
+  "@media screen and (max-width: 1200px)": {
     // Size.DesktopMax
     root: {
       paddingLeft: '20%',
       width: '60%'
     }
   }, 
-  "@media (max-width: 1024px)": {
+  "@media screen and (max-width: 1024px)": {
     // Size.LaptopMax
     root: {
       paddingLeft: '15%',
       width: '70%'
     }
   }, 
-  "@media (max-width: 768px)": {
+  "@media screen and (max-width: 768px)": {
     // Size.PadMax
     root: {
       paddingLeft: '10%',
       width: '80%'
     }
   }, 
-  "@media (max-width: 480px)": {
+  "@media screen and (max-width: 480px)": {
     // Size.MobileMax
     root: {
       paddingLeft: '5%',

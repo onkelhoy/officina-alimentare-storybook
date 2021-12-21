@@ -49,16 +49,16 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
     position: 'relative',
   },
 
-  "@media (max-width: 1200px)": {
+  "@media screen and (max-width: 1200px)": {
     // Size.DesktopMax
   }, 
-  "@media (max-width: 1024px)": {
+  "@media screen and (max-width: 1024px)": {
     // Size.LaptopMax
   }, 
-  "@media (max-width: 768px)": {
+  "@media screen and (max-width: 768px)": {
     // Size.PadMax
   }, 
-  "@media (max-width: 480px)": {
+  "@media screen and (max-width: 480px)": {
     // Size.MobileMax
   }
 })

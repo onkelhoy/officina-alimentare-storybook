@@ -1,11 +1,20 @@
 import React from 'react';
 import { MediaDevices, Size } from "./Enums";
 
-export type MediaMobile = `@media (max-width: ${Size.MobileMax}px)`;
-export type MediaPad = `@media (max-width: ${Size.PadMax}px)`;
-export type MediaLaptop = `@media (max-width: ${Size.LaptopMax}px)`;
-export type MediaDesktop = `@media (max-width: ${Size.DesktopMax}px)`;
+export type MediaMobile = `@media screen and (max-width: ${Size.MobileMax}px)`;
+export type MediaPad = `@media screen and (max-width: ${Size.PadMax}px)`;
+export type MediaLaptop = `@media screen and (max-width: ${Size.LaptopMax}px)`;
+export type MediaDesktop = `@media screen and (max-width: ${Size.DesktopMax}px)`;
 export type MediaSizes = MediaDesktop|MediaLaptop|MediaPad|MediaMobile;
+export type Units = 'default'|'mobile'|'pad'|'laptop'|'desktop';
+// helper 
+export function GetMediaType (width: number): Units {
+  if (width <= Size.MobileMax) return 'mobile';
+  if (width <= Size.PadMax) return 'pad';
+  if (width <= Size.LaptopMax) return 'laptop';
+
+  return 'desktop';
+}
 
 export type CSSJustify = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-evenly' | 'space-between'
 export type CSSDirection = 'column' | 'row' | 'row-reverse' | 'column-reverse' | 'revert';

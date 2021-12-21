@@ -78,13 +78,13 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
     transition: 'background-color 120ms ease-out',
   },
 
-  "@media (max-width: 768px)": {
+  "@media screen and (max-width: 768px)": {
     // Size.PadMax
     root: {
       backgroundColor: Color.HeaderBlack
     }
   }, 
-  "@media (max-width: 480px)": {
+  "@media screen and (max-width: 480px)": {
     // Size.MobileMax
   }
 })

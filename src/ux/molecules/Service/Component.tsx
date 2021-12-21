@@ -17,9 +17,16 @@ export interface Props {
 export const Service: React.FC<Props> = props => {
   
   return (
-    <Grid style={{ height: '100%' }} container rows="6rem 15rem 1fr">
+    <Grid 
+      style={{ height: '100%' }} 
+      container 
+      rows={{
+        default: "8rem 15rem 1fr",
+        mobile: "auto 8rem auto",
+      }}
+    >
       <Typography variant="subheader" align="center">{props.title}</Typography>
-      <Image placeholderHeight={120} {...props.image} />
+      <Image placeholderHeight={120} style={{ height: '100%' }} {...props.image} />
       <Typography align="justify">{props.description}</Typography>
     </Grid>
   )

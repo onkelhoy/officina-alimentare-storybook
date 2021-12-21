@@ -4,6 +4,7 @@ import { createUseStyles } from 'react-jss';
 // utils
 import { IProps, Dimensions, Position } from 'utils/Types';
 import { Color, Size } from 'utils/Enums';
+import { AppContext } from 'AppContext';
 
 // Atoms ⚛️
 import { Image } from 'ux/atoms/Image';
@@ -25,6 +26,8 @@ interface CSSProps {
 }
 
 export const Slider: React.FC<Props> = (props) => {
+  const { windowWidth } = React.useContext(AppContext);
+  
   const [size, setSize] = React.useState<Dimensions>({ width: 0, height: 0 });
   const [panelsize, setPanelSize] = React.useState<Dimensions>({ width: 0, height: 0 });
   const [startpos, setStartpos] = React.useState<Position<string>>({ x: '50%', y: '50%' });
@@ -54,14 +57,6 @@ export const Slider: React.FC<Props> = (props) => {
   }
 
   React.useEffect(() => {
-    window.addEventListener('resize', resize);
-
-    return () => {
-      window.removeEventListener('resize', resize);
-    }
-  }, []);
-
-  React.useEffect(() => {
     if (ref.current) resize();
   }, [ref.current]);
 
@@ -70,9 +65,10 @@ export const Slider: React.FC<Props> = (props) => {
 
     if (smallscreen !== sm) {
       setSmallscreen(sm);
-      resize();
     } 
-  }, [window.innerWidth]);
+
+    resize();
+  }, [windowWidth]);
   
   return (
     <div className={[props.className, classes.root].join(' ')}>

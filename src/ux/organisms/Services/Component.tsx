@@ -53,7 +53,19 @@ export const Services: React.FC = props => {
       title={t('service.title')} 
       description={t('service.description')}
     >
-      <Grid container cols="repeat(3, 1fr)" colGap="1rem">
+      <Grid 
+        container 
+        cols={{
+          default: "repeat(3, 1fr)",
+          mobile: '1fr',
+        }}
+        rows={{
+          default: "1fr",
+          mobile: 'repeat(3, 1fr)',
+        }}
+        name="info"
+        colGap="1rem"
+      >
         {data.map((props, index) => <Service key={index} {...props} />)}
       </Grid>
     </Section>

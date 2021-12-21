@@ -3,7 +3,26 @@ import { createUseStyles } from 'react-jss';
 
 // utils
 import { CSSJustify, IProps, MultiDimensonal } from 'utils/Types';
-import { MediaSizes } from 'utils/Types';
+import { GetMediaType, Units } from 'utils/Types';
+import { AppContext } from 'AppContext';
+
+export const Grid: React.FC<Props> = (props) => {
+  const { windowWidth } = React.useContext(AppContext);
+  const classes = useStyles({ ...props, windowWidth });
+
+  return (
+    <div 
+      style={props.style}
+      className={[
+        props.className, 
+        classes.root, 
+        props.container ? classes.container : classes.item].join(' ')}
+    >
+      {props.children}
+    </div>
+  );
+}
+
 
 export interface Props extends Omit<IProps, 'cols'|'rows'> {
   container?: boolean;
@@ -24,61 +43,28 @@ export interface Props extends Omit<IProps, 'cols'|'rows'> {
   inline?: boolean;
 }
 
-export const Grid: React.FC<Props> = (props) => {
-  const classes = useStyles(props);
-
-   return (
-    <div 
-      style={props.style}
-      className={[
-        props.className, 
-        classes.root, 
-        props.container ? classes.container : classes.item].join(' ')}
-    >
-      {props.children}
-    </div>
-  );
+interface CSSProps extends Props {
+  windowWidth: number;
 }
 
 // design 
-type RuleName = 'root' | 'item' | 'container' | MediaSizes;
-const useStyles = createUseStyles<RuleName, Props, unknown>({
+type RuleName = 'root' | 'item' | 'container';
+const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
   root: {
     areaName: (props) => props.name ?? '',
   },
-  item: props => renderItem(props, 'default'),
+  item: props => renderItem(props, GetMediaType(props.windowWidth)),
 
   container: props => ({
     height: '100%',
     display: props.inline ? 'inline-grid' : 'grid',
-    gridTemplateColumns: RowCol(props, 'cols', 'default'),
-    gridTemplateRows: RowCol(props, 'rows', 'default'),
+    gridTemplateColumns: RowCol(props, 'cols', GetMediaType(props.windowWidth)),
+    gridTemplateRows: RowCol(props, 'rows', GetMediaType(props.windowWidth)),
     alignItems: props.alignItems,
 
     gridGap: props.gap,
     gridColumnGap: props.colGap,
     gridRowGap: props.rowGap,
-  }),
-
-  "@media (max-width: 1200px)": props => ({
-    // Size.DesktopMax
-    container: renderContainer(props, 'desktop'),
-    item: renderItem(props, 'desktop'),
-  }), 
-  "@media (max-width: 1024px)": props => ({
-    // Size.LaptopMax
-    container: renderContainer(props, 'laptop'),
-    item: renderItem(props, 'laptop'),
-  }), 
-  "@media (max-width: 768px)": props => ({
-    // Size.PadMax
-    container: renderContainer(props, 'pad'),
-    item: renderItem(props, 'pad'),
-  }), 
-  "@media (max-width: 480px)": props => ({
-    // Size.MobileMax
-    container: renderContainer(props, 'mobile'),
-    item: renderItem(props, 'mobile'),
   })
 });
 
@@ -104,7 +90,6 @@ type IRCM = MultiDimensonal<RowColSplit>;
 type FT = 'from' | 'to';
 type RC = 'row' | 'col';
 type RCS = 'rows' | 'cols';
-type Units = 'default'|'mobile'|'pad'|'laptop'|'desktop';
 type GapType = string | number;
 
 // helper functions
@@ -122,7 +107,7 @@ function FromTo(props: Props, type: RC, mode: FT, unit: Units): number | undefin
 function RowCol(props: Props, type: RCS, unit: Units): string | undefined {
   if (typeof props[type] === 'string') return props[type] as string;
   if ((props[type] as MultiDimensonal)?.default) {
-    return (props[type] as MultiDimensonal)[unit];
+    return (props[type] as MultiDimensonal)[unit] || (props[type] as MultiDimensonal)?.default;
   }
 }
 
@@ -132,12 +117,5 @@ function renderItem(props: Props, unit: Units): IGridItem {
     gridColumnEnd: FromTo(props, 'col', 'to', unit),
     gridRowStart: FromTo(props, 'row', 'from', unit),
     gridRowEnd: FromTo(props, 'row', 'to', unit),
-  };
-}
-
-function renderContainer(props: Props, unit: Units): IGridContainer {
-  return {
-    gridTemplateColumns: RowCol(props, 'cols', unit),
-    gridTemplateRows: RowCol(props, 'rows', unit),
   };
 }
