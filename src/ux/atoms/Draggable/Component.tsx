@@ -1,13 +1,8 @@
-import React, { ReactChild } from 'react';
+import React from 'react';
 import { createUseStyles } from 'react-jss';
 
 // utils
-import { IProps } from 'utils/Types';
-
-interface Position<T = number> {
-  x: T;
-  y: T;
-}
+import { IProps, Position } from 'utils/Types';
 
 interface Props extends IProps<HTMLDivElement> {
   startPosition?: Position<string>;
@@ -191,6 +186,23 @@ export const Draggable: React.FC<Props> = (props) => {
       }
     }
   }, [ref.current]);
+
+  React.useEffect(() => {
+    const s = props.startPosition;
+
+    if (s) {
+      const pos: Position = { x: -1, y: -1 };
+      if (typeof s.x === 'number') pos.x = s.x;
+      else if (s.x.endsWith('px')) pos.x = Number(s.x.slice(0, s.x.length - 2));
+
+      if (typeof s.y === 'number') pos.y = s.y;
+      else if (s.y.endsWith('px')) pos.y = Number(s.y.slice(0, s.y.length - 2));
+
+      if (pos.x !== -1 && pos.y !== -1) {
+        move(pos);
+      }
+    }
+  }, [props.startPosition]);
 
   const { startPosition, className, onMove, freezeY, freezeX, ...rest } = props;
   return (

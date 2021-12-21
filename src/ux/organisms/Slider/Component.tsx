@@ -2,8 +2,7 @@ import React from 'react';
 import { createUseStyles } from 'react-jss';
 
 // utils
-import { IProps } from 'utils/Types';
-import { useMediaSize, useSize } from 'utils/Hooks';
+import { IProps, Dimensions, Position } from 'utils/Types';
 import { Color, Size } from 'utils/Enums';
 
 // Atoms ⚛️
@@ -13,16 +12,10 @@ import { Draggable } from 'ux/atoms/Draggable';
 // Molecules *️⃣
 import { Knob } from 'ux/molecules/Knob';
 
-
 export interface Props extends IProps {
   overlay: string;
   logo: string;
   source: string;
-}
-
-interface Dimensions {
-  width: number;
-  height: number;
 }
 
 interface CSSProps {
@@ -32,9 +25,9 @@ interface CSSProps {
 }
 
 export const Slider: React.FC<Props> = (props) => {
-  const rootsize = useSize();
   const [size, setSize] = React.useState<Dimensions>({ width: 0, height: 0 });
   const [panelsize, setPanelSize] = React.useState<Dimensions>({ width: 0, height: 0 });
+  const [startpos, setStartpos] = React.useState<Position<string>>({ x: '50%', y: '50%' });
   const [smallscreen, setSmallscreen] = React.useState<boolean>(window.innerWidth < Size.PadMax);
   
   const ref = React.useRef<HTMLImageElement>(null);
@@ -49,27 +42,37 @@ export const Slider: React.FC<Props> = (props) => {
       const box = ref.current.getBoundingClientRect();
       setPanelSize({ width: box.width, height: box.height });
 
-      if (rootsize.width < Size.PadMax) setSize({ width: 0, height: box.height / 2});
-      else setSize({width: box.width / 2, height: 0 });
+      let w = 0, h = 0;
+      if (window.innerWidth < Size.PadMax) 
+        h = box.height / 2;
+      else 
+        w = box.width / 2;
+
+      setSize({ width: w, height: h });
+      setStartpos({ x: w.toString().concat('px'), y: h.toString().concat('px') });
     }
   }
 
   React.useEffect(() => {
-    window.onresize = resize;
+    window.addEventListener('resize', resize);
 
     return () => {
-      window.onresize = null;
+      window.removeEventListener('resize', resize);
     }
   }, []);
 
   React.useEffect(() => {
-    const sm = rootsize.width < Size.PadMax;
+    if (ref.current) resize();
+  }, [ref.current]);
 
-    if (!smallscreen && sm || smallscreen && !sm) {
+  React.useEffect(() => {
+    const sm = window.innerWidth < Size.PadMax;
+
+    if (smallscreen !== sm) {
       setSmallscreen(sm);
       resize();
     } 
-  }, [rootsize.width]);
+  }, [window.innerWidth]);
   
   return (
     <div className={[props.className, classes.root].join(' ')}>
@@ -78,7 +81,7 @@ export const Slider: React.FC<Props> = (props) => {
       </div>
       <Draggable 
         onMove={onmove} 
-        startPosition={{ x: '50%', y: '50%' }}
+        startPosition={startpos}
         freezeY={!smallscreen} 
         freezeX={smallscreen}
         className={classes.drag}

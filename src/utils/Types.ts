@@ -42,3 +42,13 @@ export interface MultiDimensonal<T = string> {
   laptop?: T;
   desktop?: T;
 };
+
+export interface Dimensions<T = number> {
+  width: T;
+  height: T;
+}
+
+export interface Position<T = number> {
+  x: T;
+  y: T;
+}
