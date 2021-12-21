@@ -5,7 +5,7 @@ import { createUseStyles } from 'react-jss';
 // utils
 import { MediaMobile, MediaPad, IProps } from 'utils/Types';
 import { Color, Size } from 'utils/Enums';
-import { useSize } from 'utils/Hooks';
+import { AppContext } from 'AppContext';
 
 // Atoms ⚛️
 import { Grid } from 'ux/atoms/Grid';
@@ -22,12 +22,12 @@ export interface Props extends IProps {
 }
 
 export const Header: React.FC<Props> = (props) => {
-  const rootsize = useSize();
+  const { windowWidth } = React.useContext(AppContext);
   const classes = useStyles(props);
   const { t } = useTranslation();
   const links = ["service", "team", "story", "portfolio"];
 
-  const smallscreen = rootsize.width < Size.PadMax;
+  const smallscreen = windowWidth < Size.PadMax;
 
   return (
     <Scrollpass 
