@@ -57,10 +57,6 @@ export const Slider: React.FC<Props> = (props) => {
   }
 
   React.useEffect(() => {
-    if (ref.current) resize();
-  }, [ref.current]);
-
-  React.useEffect(() => {
     const sm = window.innerWidth < Size.PadMax;
 
     if (smallscreen !== sm) {
@@ -69,6 +65,19 @@ export const Slider: React.FC<Props> = (props) => {
 
     resize();
   }, [windowWidth]);
+
+  React.useEffect(() => {
+    const interval = window.setInterval(() => {
+      if (ref.current) {
+        resize();
+        window.clearInterval(interval);
+      }
+    }, 100);
+
+    return () => {
+      window.clearInterval(interval);
+    }
+  }, [])
   
   return (
     <div className={[props.className, classes.root].join(' ')}>

@@ -2,7 +2,7 @@ import React from 'react';
 import { createUseStyles } from 'react-jss';
 
 // utils
-import { IProps } from 'utils/Types';
+import { IProps, MediaSizes } from 'utils/Types';
 import { Color } from 'utils/Enums';
 
 export interface Props extends Omit<IProps, 'size'> {
@@ -55,6 +55,9 @@ export const Typography: React.FC<Props> = (props) => {
   }
 }
 
+// types & interfaces
+type RuleName = 'root'|'body'|'logo'|'subheader'|'header'|MediaSizes;
+
 // css design
 const useStyles = createUseStyles<RuleName, Props, unknown>({
   root: props => ({
@@ -90,10 +93,23 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
     marginBottom: '.5rem',
     fontWeight: 500,
     lineHeight: 1.2,
+  },
+
+  "@media screen and (max-width: 1200px)": {
+    // Size.DesktopMax
+  }, 
+  "@media screen and (max-width: 1024px)": {
+    // Size.LaptopMax
+  }, 
+  "@media screen and (max-width: 768px)": {
+    // Size.PadMax
+  }, 
+  "@media screen and (max-width: 480px)": {
+    // Size.MobileMax
+    body: {
+      fontSize: '1.3rem'
+    }
   }
 })
-
-// types & interfaces
-type RuleName = 'root' | 'body' | 'logo' | 'subheader' | 'header';
 
 // helper functions

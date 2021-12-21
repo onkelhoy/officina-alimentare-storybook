@@ -40,7 +40,7 @@ export const Stories: React.FC = props => {
       name="story" 
       title={t('story.title')} 
     >
-      <Grid container rows="repeat(3, 1fr)" rowGap="5rem">
+      <Grid container rows="repeat(3, 1fr)" rowGap="4rem">
         {data.map((props, index) => <Story key={index} {...props}/>)}
       </Grid>
     </Section>
