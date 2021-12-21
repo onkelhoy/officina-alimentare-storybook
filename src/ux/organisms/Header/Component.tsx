@@ -40,8 +40,8 @@ export const Header: React.FC<Props> = (props) => {
         <Grid container 
           cols={{ 
             default: "1fr 1fr",
-            mobile: "2fr 0",
-            pad: "1fr 2fr",
+            mobile: "1fr 0",
+            pad: "2fr 1fr",
             laptop: "2fr 1fr",
             desktop: "3fr 1fr"
           }}
@@ -51,13 +51,13 @@ export const Header: React.FC<Props> = (props) => {
               <Typography light={smallscreen} variant="logo">{t("header.title")}</Typography>
             </Link>
           </Flex>
-          <Flex alignItems="center" justifyContent="space-between">
-            {links.map(link => <Link color={smallscreen ? Color.BodyTextLight : Color.BodyText} key={link} href={`#${link}`}>{t(`header.parts.${link}`)}</Link>)}
+          {!smallscreen && <Flex alignItems="center" justifyContent="space-between">
+            {links.map(link => <Link color={Color.BodyText} key={link} href={`#${link}`}>{t(`header.parts.${link}`)}</Link>)}
             <Flex style={{ marginTop: 7 }} alignItems="center" justifyContent="space-between">
               <Language prefix="it" />
               <Language prefix="en" marginLeft={5} />
             </Flex>
-          </Flex>
+          </Flex>}
         </Grid>
       )}
     </Scrollpass>

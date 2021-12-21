@@ -43,7 +43,7 @@ export const Slider: React.FC<Props> = (props) => {
   function resize () {
     if (ref.current) {
       const box = ref.current.getBoundingClientRect();
-      setPanelSize({ width: box.width, height: box.height });
+      setPanelSize({ width: box.width, height: box.height });
 
       let w = 0, h = 0;
       if (window.innerWidth < Size.PadMax) 
@@ -136,6 +136,9 @@ const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
       position: 'absolute',
       top: 0,
       left: 0,
+      width: props => props.smallscreen ? '100%' : '',
+      // height: props => props.smallscreen ? '100%' : 'auto',
+      transform: props => props.smallscreen ? 'rotate(90deg) scale(1.2) translateX(20%)' : '',
     }
   },
 
@@ -150,7 +153,8 @@ const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
       height: props.smallscreen ? h : '100%',
   
       '& > img': {
-        width: props.panelsize.width,
+        width: props.smallscreen ? 'auto' : props.panelsize.width,
+        // height: props.smallscreen ? props.panelsize.width : 'auto',
       }
     }
   },
