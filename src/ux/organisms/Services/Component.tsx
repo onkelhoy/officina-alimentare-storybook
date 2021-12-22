@@ -20,7 +20,7 @@ export const Services: React.FC = props => {
 
   const { t } = useTranslation();
 
-  const data: IService[] = [
+  const data: IService[] = React.useMemo<IService[]>(() => [
     {
       image: {
         src: "/assets/images/services/services1.svg",
@@ -45,10 +45,7 @@ export const Services: React.FC = props => {
       title: t("service.quality_assurance.title"),
       description: t("service.quality_assurance.texts", { returnObjects: true }),
     },
-  ];
-
-  const d = t("service.quality_assurance.texts", { returnObjects: true });
-  console.log(d, typeof d);
+  ], []);
 
   return (
     <Section 
