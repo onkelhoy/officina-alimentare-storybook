@@ -31,7 +31,7 @@ export const Slider: React.FC<Props> = (props) => {
   const [size, setSize] = React.useState<Dimensions>({ width: 0, height: 0 });
   const [panelsize, setPanelSize] = React.useState<Dimensions>({ width: 0, height: 0 });
   const [startpos, setStartpos] = React.useState<Position<string>>({ x: '50%', y: '50%' });
-  const [smallscreen, setSmallscreen] = React.useState<boolean>(window.innerWidth < Size.PadMax);
+  const [smallscreen, setSmallscreen] = React.useState<boolean>(window.innerWidth <= Size.PadMax);
   
   const ref = React.useRef<HTMLImageElement>(null);
   const classes = useStyles({ size, panelsize, smallscreen });
@@ -46,7 +46,7 @@ export const Slider: React.FC<Props> = (props) => {
       setPanelSize({ width: box.width, height: box.height });
 
       let w = 0, h = 0;
-      if (window.innerWidth < Size.PadMax) 
+      if (window.innerWidth <= Size.PadMax) 
         h = box.height / 2;
       else 
         w = box.width / 2;
@@ -57,7 +57,7 @@ export const Slider: React.FC<Props> = (props) => {
   }
 
   React.useEffect(() => {
-    const sm = window.innerWidth < Size.PadMax;
+    const sm = window.innerWidth <= Size.PadMax;
 
     if (smallscreen !== sm) {
       setSmallscreen(sm);

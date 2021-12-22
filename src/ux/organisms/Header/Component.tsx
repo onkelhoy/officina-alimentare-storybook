@@ -27,7 +27,7 @@ export const Header: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const links = ["service", "team", "story", "partnership", "portfolio"];
 
-  const smallscreen = windowWidth < Size.PadMax;
+  const smallscreen = windowWidth <= Size.PadMax;
 
   return (
     <Scrollpass 
@@ -42,6 +42,7 @@ export const Header: React.FC<Props> = (props) => {
             default: "1fr 1fr",
             mobile: "1fr 0",
             pad: "2fr 1fr",
+            laptop: "4fr 5fr"
           }}
         >
           <Flex alignItems="center">
