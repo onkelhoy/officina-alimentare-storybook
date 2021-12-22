@@ -5,6 +5,7 @@
       "story": "Storia",
       "service": "Servizi",
       "team": "Su di noi",
+      "partnership": "Partnership",
       "portfolio": "Dicono di noi",
       "contact": "Contatti"
     }
@@ -30,8 +31,7 @@
       "texts": [
         "Supporto nei rapporti e nei contenziosi con fornitori, clienti o autorità di controllo. ",
         "Redazione e/o verifica della conformità legale delle etichette. ",
-        "Audit dei fornitori per la qualifica, la sorveglianza o per indagare su gravi problemi di qualità. ",
-        "Corsi di formazione personalizzati, condotti col metodo partecipativo, su qualità, igiene e sicurezza degli alimenti e dell’alimentazione."
+        "Audit dei fornitori per la qualifica, la sorveglianza o per indagare su gravi problemi di qualità. "
       ]
     }
   },
@@ -75,6 +75,23 @@
         "Siamo sempre più focalizzati sulle attività afferenti alla produzione biologica, al controllo delle filiere, al Fair Trade, alla Cooperazione Internazionale e alle produzioni artigianali di alta qualità con ricaduta sociale."
       ]
     ]
+  },
+  "partnership": {
+    "title": "Partnership",
+    "description": "Collaboriamo con professionisti senior con competenze in altri settori e con le seguenti società in grado di offrire un servizio d’eccellenza:",
+
+    "chimical": {
+      "title": "Chimical Service Srl",
+      "description": ", per proteggere dagli infestanti, in modo naturale ed efficace, le derrate alimentari e gli ambienti di trasformazione."
+    },
+    "pack": {
+      "title": "Pack Co Srl",
+      "description": ", per lo studio di packaging innovativi, a basso impatto ambientale o per estendere la Shelf-Life dei prodotti."
+    },
+    "vassanelli": {
+      "title": "Vassanelli Lab Srl",
+      "description": ", per la validazione sperimentale dei processi di pulizia e per lo studio e l’implementazione di piani d’analisi efficaci e sostenibili."
+    }
   },
   "portfolio": {
     "title": "Dicono di noi"

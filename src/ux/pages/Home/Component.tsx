@@ -14,6 +14,7 @@ import { Stories } from 'ux/organisms/Stories';
 import { Portfolios } from 'ux/organisms/Portfolios';
 import { Header } from 'ux/organisms/Header';
 import { Slider } from 'ux/organisms/Slider';
+import { Partnership } from 'ux/organisms/Partnership';
 
 export interface Props {
  
@@ -35,6 +36,7 @@ export const Home: React.FC<Props> = (props) => {
         <Services />
         <Teams />
         <Stories />
+        <Partnership />
       </Container>
       <Portfolios />
       <Footer />

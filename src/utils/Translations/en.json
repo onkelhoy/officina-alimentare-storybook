@@ -5,6 +5,7 @@
       "story": "Story",
       "service": "Service",
       "team": "Team",
+      "partnership": "Partnership",
       "portfolio": "Portfolio",
       "contact": "Contact"
     }
@@ -30,8 +31,7 @@
       "texts": [
         "Support in relationships and litigation with suppliers, customers or supervisory authorities. ",
         "Drafting and/or verification of legal compliance of labels. ",
-        "Supplier audits for qualification, surveillance, or to investigate serious quality problems. ",
-        "Personalized training courses, conducted with the participatory method, on quality, hygiene and safety of food and nutrition."
+        "Supplier audits for qualification, surveillance, or to investigate serious quality problems. "
       ] 
     }
   },
@@ -75,6 +75,23 @@
         "We are increasingly focused on activities related to organic production, control of supply chains, Fair Trade, International Cooperation and high quality artisanal production with social impact."
       ]
     ]
+  },
+  "partnership": {
+    "title": "Partnership",
+    "description": "When necessary, we collaborate with other senior professionals and with the following companies able to offer an excellent service:",
+
+    "chimical": {
+      "title": "Chimical Service Srl",
+      "description": ", to ensure natural and effective protection from pests row materials and processing plants."
+    },
+    "pack": {
+      "title": "Pack Co Srl",
+      "description": ", to introduce innovative packaging with low environmental impact or to extend product Shelf-Life."
+    },
+    "vassanelli": {
+      "title": "Vassanelli Lab Srl",
+      "description": ", to validate effectiveness of cleaning process on removal of chemicals and allergens; to set and put in place an effective and sustainable analysis plan."
+    }
   },
   "portfolio": {
     "title": "They say about us"
