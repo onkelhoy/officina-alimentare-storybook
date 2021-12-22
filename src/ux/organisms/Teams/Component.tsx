@@ -28,7 +28,7 @@ export const Teams: React.FC = props => {
         alt: t("team.members.0.alt"),
       },
       role: t("team.members.0.role"),
-      linkedin: "#",
+      linkedin: "https://it.linkedin.com/in/diego-sambataro-45887729",
     },
     {
       name: t("team.members.1.name"),
@@ -37,7 +37,7 @@ export const Teams: React.FC = props => {
         alt: t("team.members.1.alt"),
       },
       role: t("team.members.1.role"),
-      linkedin: "#",
+      linkedin: "https://it.linkedin.com/in/biagio-calcavecchia-455ba21",
     },
   ];
 
