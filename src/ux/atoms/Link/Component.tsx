@@ -34,6 +34,7 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
     
     '&:hover': {
       fontWeight: !props.passive ? 800 : 'normal',
+      color: Color.Black,
     }
   }),
 })

@@ -45,7 +45,7 @@ export const Section = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
 type RuleName = 'root' | 'header' | 'subheader';
 const useStyles = createUseStyles<RuleName, Props, unknown>({
   root: {
-    marginTop: '8rem'
+    paddingTop: '6rem'
   },
   header: {
     fontSize: '3rem',

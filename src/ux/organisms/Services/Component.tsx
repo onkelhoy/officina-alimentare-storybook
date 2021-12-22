@@ -7,7 +7,7 @@
 import React from 'react';
 
 // utilities
-import { useTranslation } from "react-i18next";
+import { useTranslation, TFunction } from "react-i18next";
 
 // Atoms ⚛️
 import { Grid } from 'ux/atoms/Grid';
@@ -47,6 +47,9 @@ export const Services: React.FC = props => {
     },
   ];
 
+  const d = t("service.quality_assurance.texts", { returnObjects: true });
+  console.log(d, typeof d);
+
   return (
     <Section 
       name='service' 
@@ -64,10 +67,18 @@ export const Services: React.FC = props => {
           mobile: 'repeat(3, 1fr)',
         }}
         name="info"
-        colGap="1rem"
+        colGap="2rem"
       >
         {data.map((props, index) => <Service key={index} {...props} />)}
       </Grid>
     </Section>
   );
+}
+
+// helper functions
+function getDescription (t: TFunction<"translation", undefined>, name:string): string {
+  const d = t(name, { returnObjects: true }) as Array<string>;
+
+  console.log(d, d.join('\n'))
+  return d.join('\n');
 }

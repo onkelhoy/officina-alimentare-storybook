@@ -19,5 +19,5 @@ Basic.args = {
     src: 'http://placehold.it/200x200',
     alt: 'service placeholder picture',
   },
-  description: 'Commodo est cillum consequat anim. Aliqua quis velit in nisi ipsum adipisicing ad quis nulla magna laborum fugiat occaecat. Sint occaecat fugiat mollit commodo tempor adipisicing. Tempor est occaecat sint ad sit Lorem dolor nostrud culpa proident.',
+  description: ['Commodo est cillum consequat anim. Aliqua quis velit in nisi ipsum adipisicing ad quis nulla magna laborum fugiat occaecat. Sint occaecat fugiat mollit commodo tempor adipisicing. Tempor est occaecat sint ad sit Lorem dolor nostrud culpa proident.'],
 };

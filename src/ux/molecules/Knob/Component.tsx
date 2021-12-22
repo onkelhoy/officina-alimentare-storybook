@@ -103,13 +103,13 @@ function box(props: Props, second?: Boolean) {
     width: 150,
     height: 150,
 
-    opacity: '0',
+    // opacity: '0',
     transition: 'opacity ease-out 200ms',
     fontSize: '18pt',
 
-    '&:hover': {
-      opacity: 1,
-    }
+    // '&:hover': {
+    //   opacity: 1,
+    // }
   }
 }
 

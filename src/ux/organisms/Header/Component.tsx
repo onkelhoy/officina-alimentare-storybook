@@ -42,8 +42,6 @@ export const Header: React.FC<Props> = (props) => {
             default: "1fr 1fr",
             mobile: "1fr 0",
             pad: "2fr 1fr",
-            laptop: "2fr 1fr",
-            desktop: "3fr 1fr"
           }}
         >
           <Flex alignItems="center">

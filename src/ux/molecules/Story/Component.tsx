@@ -17,14 +17,14 @@ export const Story: React.FC<Props> = props => {
       container 
       cols={{
         default: "1fr 3fr 1fr",
-        mobile: '1fr 5fr 1fr',
+        mobile: '0 1fr 0',
       }} 
       colGap="1rem"
       alignItems="center"
     >
       <Image style={{ transform: 'translateX(-0.5rem)' }} src={`/assets/images/story/${props.date}A.svg`} alt="story A"/>
       {props.texts.map((text, index) => (
-        <Typography variant="body" key={index}>{text}</Typography>
+        <Typography align="justify" variant="body" key={index}>{text}</Typography>
       ))}
       <Image style={{ transform: 'translateX(0.5rem)' }} src={`/assets/images/story/${props.date}B.svg`} alt="story B"/>
     </Grid>

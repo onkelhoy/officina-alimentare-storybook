@@ -25,9 +25,8 @@ export const Home: React.FC<Props> = (props) => {
   return (
     <div>
       <Header />
-      <br />
-      <br />
-      <Slider 
+      <Slider
+        className={classes.slider}
         source='/assets/images/slider/source.svg'
         overlay='/assets/images/slider/overlay.svg'
         logo='/assets/images/slider/logo.svg'
@@ -36,17 +35,24 @@ export const Home: React.FC<Props> = (props) => {
         <Services />
         <Teams />
         <Stories />
-        <Portfolios />
       </Container>
+      <Portfolios />
       <Footer />
     </div>
   );
 }
 
+// types & interfaces
+type RuleName = 'root'|'slider'| MediaSizes;
+
 // css design
 const useStyles = createUseStyles<RuleName, Props, unknown>({
   root: {
     position: 'relative',
+  },
+
+  slider: {
+    marginTop: '4rem',
   },
 
   "@media screen and (max-width: 1200px)": {
@@ -63,7 +69,5 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
   }
 })
 
-// types & interfaces
-type RuleName = 'root' | MediaSizes;
 
 // helper functions

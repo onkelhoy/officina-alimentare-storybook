@@ -1,4 +1,5 @@
 import React from 'react';
+import { createUseStyles } from 'react-jss';
 
 // Atoms ⚛️
 import { Typography } from 'ux/atoms/Typography';
@@ -11,10 +12,11 @@ export interface Props {
     src: string;
     alt: string;
   };
-  description: string;
+  description: string[];
 }
 
 export const Service: React.FC<Props> = props => {
+  const classes = useStyles(props);
   
   return (
     <Grid 
@@ -27,7 +29,21 @@ export const Service: React.FC<Props> = props => {
     >
       <Typography variant="subheader" align="center">{props.title}</Typography>
       <Image placeholderHeight={120} style={{ height: '100%' }} {...props.image} />
-      <Typography align="justify">{props.description}</Typography>
+      <div className={classes.desc}>
+        {props.description.map((text, index) => <Typography key={index} style={{ margin: 0 }} align="justify">{text}</Typography>)}
+      </div>
     </Grid>
   )
 }
+
+// types & interfaces
+type RuleName = 'desc';
+
+// css design
+const useStyles = createUseStyles<RuleName, Props, unknown>({
+  desc: {
+    
+  },
+});
+
+// helper functions

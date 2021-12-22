@@ -36,15 +36,15 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
   "@media screen and (max-width: 1200px)": {
     // Size.DesktopMax
     root: {
-      paddingLeft: '20%',
-      width: '60%'
+      paddingLeft: '15%',
+      width: '70%'
     }
   }, 
   "@media screen and (max-width: 1024px)": {
     // Size.LaptopMax
     root: {
-      paddingLeft: '15%',
-      width: '70%'
+      paddingLeft: '12.5%',
+      width: '75%'
     }
   }, 
   "@media screen and (max-width: 768px)": {

@@ -110,7 +110,8 @@ type RuleName = 'root'|'left'|'right'|'panel'|'drag';
 
 const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
   root: {
-    width: '100%',
+    left: '6%',
+    width: '88%',
     height: props => props.panelsize.height || '100vh',
 
     position: 'relative',
