@@ -16,16 +16,8 @@ import { Section } from 'ux/molecules/Section';
 
 const Component: React.FC = props => {
   const { t } = useTranslation();
-  const ref = React.useRef<HTMLDivElement>(null);
-  const [y, setY] = React.useState<number>(2000);
 
-  React.useEffect(() => {
-    if (ref.current) {
-      setY(ref.current.offsetTop);
-    }
-  }, [ref.current?.offsetTop]);
-
-  const classes = useStyles({ y });
+  const classes = useStyles();
 
   const properties: Properties = [];
 
@@ -39,7 +31,6 @@ const Component: React.FC = props => {
 
   return (
     <Section 
-      ref={ref}
       name='portfolio' 
       title={t('portfolio.title')} 
       classes={classes}
@@ -56,19 +47,20 @@ export const Portfolios = React.memo(Component);
 
 // styling
 type RuleName = 'root' | 'body';
-const useStyles = createUseStyles<RuleName, StyleProps, unknown>({
+const useStyles = createUseStyles<RuleName, unknown, unknown>({
   root: {
+    position: 'relative',
     marginBottom: '5rem',
     height: '100vh',
   },
-  body: props => ({
+  body: {
     position: 'absolute',
-    top: `${props.y}px`,
+    top: '7rem',
     left: '10vw',
     width: '80vw',
     height: '90vh',
     minHeight: '200px',
-  })
+  }
 });
 
 
@@ -99,7 +91,6 @@ const names = [
 // interfaces 
 interface Point { x: number, y: number, angle?: number };
 interface IProperty extends Point { angle: number; }
-interface StyleProps { y: number; }
 type Properties = IProperty[];
 
 // helper functions
