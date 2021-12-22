@@ -32,7 +32,7 @@ export const Header: React.FC<Props> = (props) => {
   return (
     <Scrollpass 
       style={props.style}
-      limit={10} 
+      limit={window.innerHeight - 100} 
       padding="1rem"
       className={[props.className, classes.root].join(' ')}
     >
