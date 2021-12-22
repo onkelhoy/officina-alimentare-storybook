@@ -25,7 +25,7 @@ export const Header: React.FC<Props> = (props) => {
   const { windowWidth } = React.useContext(AppContext);
   const classes = useStyles(props);
   const { t } = useTranslation();
-  const links = ["service", "team", "story", "portfolio"];
+  const links = ["service", "team", "story", "partnership", "portfolio"];
 
   const smallscreen = windowWidth < Size.PadMax;
 
