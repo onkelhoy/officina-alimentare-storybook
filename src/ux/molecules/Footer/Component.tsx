@@ -27,7 +27,7 @@ export const Footer: React.FC<Props> = (props) => {
           default: '1fr 2fr 1fr', // TODO so x will contain all the advanced stuff (1-1 * 1-1)
           mobile: '0 1fr 0'
         }} 
-        rows="20rem"
+        rows="25rem"
       >
         <Flex alignItems="center" justifyContent="center">
           <Image src="/assets/images/footer/A.svg" alt="footer left"/>
@@ -67,7 +67,8 @@ export const Footer: React.FC<Props> = (props) => {
             col={{ from: 1, to: 3 }} 
             row={{ from: 2, to: 3 }}
           >
-            <Flex justifyContent="center" alignItems="center">
+            <Flex direction="column" justifyContent="center" alignItems="center">
+              <Typography size="small" color={Color.White}><em>{t("footer.leonardocite")}</em></Typography>
               <Typography size="small" color={Color.White}><em>{t("footer.copyright")}</em></Typography>
             </Flex>
           </Grid>

@@ -15,6 +15,7 @@ export enum Color {
   Black = 'black',
   Gray = '#444',
   Blue = 'rgb(22, 74, 245)',
+  Linkedin = '#0a66c2',
 
   BodyText = '#6c757d',
   BodyTextLight = '#dce7f1',

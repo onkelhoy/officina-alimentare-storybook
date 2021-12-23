@@ -56,8 +56,8 @@ export const Header: React.FC<Props> = (props) => {
         <Grid className={classes.grid} container 
           cols={{ 
             default: "1fr 1fr",
-            mobile: "1fr 0",
-            pad: "2fr 1fr",
+            mobile: "1fr 4rem",
+            pad: "1fr 4rem",
             laptop: "4fr 5fr"
           }}
         >

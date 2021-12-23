@@ -1,4 +1,5 @@
 import React from 'react';
+import { createUseStyles } from 'react-jss';
 
 // utils
 import { Color } from 'utils/Enums';
@@ -19,15 +20,32 @@ export interface Props {
 }
 
 export const Profile: React.FC<Props> = props => {
-
+  const classes = useStyles(props);
+  
   return (
     <div>
       <Image {...props.image} height={150} />
       <Typography variant="subheader" align="center">{props.name}</Typography>
       <Typography align="center">{props.role}</Typography>
       <Typography align="center">
-        <Link color={Color.Blue} href={props.linkedin}>ln</Link>
+        <Link href={props.linkedin}>
+          <Image className={classes.linkedin} width={17} src="assets/images/team/linkedin.svg" alt="linkedin" />
+        </Link>
       </Typography>
     </div>
   )
 }
+
+// types & interfaces
+type RuleName = 'linkedin';
+
+// css design
+const useStyles = createUseStyles<RuleName, Props, unknown>({
+  linkedin: {
+    '& svg': {
+      color: Color.Linkedin,
+    }
+  },
+});
+
+// helper functions

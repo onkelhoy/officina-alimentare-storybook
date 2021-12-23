@@ -79,11 +79,6 @@ interface IGridItem {
   gridRowStart?: number;
   gridRowEnd?: number;
 };
-interface IGridContainer {
-  gridTemplateColumns?: string;
-  gridTemplateRows?: string;
-  gridTemplateAreas?: string;
-};
 
 // Item-Row-Col-MultiDimensonal
 type IRCM = MultiDimensonal<RowColSplit>;

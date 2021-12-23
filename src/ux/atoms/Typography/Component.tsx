@@ -109,6 +109,11 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
     // Size.MobileMax
     body: {
       fontSize: '1.3rem'
+    },
+
+    logo: {
+      fontSize: '18pt',
+      marginLeft: 0,
     }
   }
 })
