@@ -6,6 +6,32 @@ import { Flex } from '.'
 export default {
   title: 'atoms/Flex',
   component: Flex,
+  
+  argTypes: {
+    justifyContent: {
+      options: ['center', 'flex-end', 'flex-start', 'space-around', 'space-evenly', 'space-between'],
+  
+      control: { 
+        type: 'select'
+      } 
+    },
+
+    alignItems: {
+      options: ['center', 'flex-end', 'flex-start', 'space-around', 'space-evenly', 'space-between'],
+  
+      control: { 
+        type: 'select'
+      } 
+    },
+
+    direction: {
+      options: ['row', 'column', 'row-reverse', 'column-reverse', 'revert'],
+
+      control: { 
+        type: 'select'
+      }
+    }
+  }
 } as ComponentMeta<typeof Flex>;
 
 const Template: ComponentStory<typeof Flex> = (args) => (

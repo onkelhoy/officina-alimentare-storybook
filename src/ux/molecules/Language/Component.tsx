@@ -3,7 +3,7 @@ import i18next from "i18next";
 import { createUseStyles } from 'react-jss';
 
 // utils
-import { IProps, Languages } from 'utils/Types';
+import { IProps, Languages, MediaMobile, MediaPad } from 'utils/Types';
 import { Color } from 'utils/Enums';
 
 import { AppContext } from 'AppContext';
@@ -45,7 +45,7 @@ export const Language: React.FC<Props> = (props) => {
 }
 
 // types & interfaces
-type RuleName = 'root' | 'image';
+type RuleName = 'root' | 'image' | MediaPad;
 interface CSSProps extends Props {
   current: Languages;
 }
@@ -60,6 +60,13 @@ const useStyles = createUseStyles<RuleName, CSSProps, unknown>({
 
   image: {
     backgroundColor: Color.White,
+  },
+
+  "@media screen and (max-width: 768px)": {
+    // Size.MobileMax
+    root: {
+      width: '2rem !important'
+    }
   }
 });
 

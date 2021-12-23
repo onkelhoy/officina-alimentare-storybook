@@ -78,6 +78,7 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
     height: '100%',
     fontSize: '20pt',
     marginLeft: '4rem',
+    // fontWeight: 500,
     fontFamily: '"Nobile", sans-serif',
   },
 

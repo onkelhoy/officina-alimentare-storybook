@@ -52,6 +52,8 @@ const useStyles = createUseStyles<RuleName, unknown, unknown>({
     position: 'relative',
     marginBottom: '5rem',
     height: '100vh',
+    width: '100%',
+    overflow: 'hidden'
   },
   body: {
     position: 'absolute',

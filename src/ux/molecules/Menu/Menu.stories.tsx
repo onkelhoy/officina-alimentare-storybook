@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Menu } from '.'
 
 export default {
-  title: 'atoms/Menu',
+  title: 'molecules/Menu',
   component: Menu,
 
   argTypes: {

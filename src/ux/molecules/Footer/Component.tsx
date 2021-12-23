@@ -23,79 +23,58 @@ export const Footer: React.FC<Props> = (props) => {
     <footer className={classes.root}>
       <Grid 
         container 
-        cols={{
-          default: '25% 1fr 1fr 25%',
+        cols={{ // TODO change so its (i-x-i) 
+          default: '1fr 2fr 1fr', // TODO so x will contain all the advanced stuff (1-1 * 1-1)
+          mobile: '0 1fr 0'
         }} 
-        rows={{
-          default: "2rem 3fr 1fr"
-        }}
+        rows="20rem"
       >
-        <Grid 
-          item 
-          col={{ from: 1, to: 2 }} 
-          row={{ from: 1, to: 4 }}
-        >
-          <Flex alignItems="center" justifyContent="center">
-            <Image src="/assets/images/footer/A.svg" alt="footer left"/>
-          </Flex>
-        </Grid>
+        <Flex alignItems="center" justifyContent="center">
+          <Image src="/assets/images/footer/A.svg" alt="footer left"/>
+        </Flex>
 
         <Grid 
-          item 
-          col={{ 
-            default: { from: 2, to: 3 }
-          }} 
-          row={{ 
-            default: { from: 2, to: 3 }
+          item
+          container
+          colGap="5rem"
+          cols={{
+            default: "1fr 1fr",
+          }}
+          rows={{
+            default: "1fr 1fr"
           }}
         >
-          <Typography color={Color.White} variant="subheader">{t("footer.title")}</Typography>
-          <Typography size="smaller" color={Color.White}>{t("footer.texts.0")}</Typography>
-          <Typography size="smaller" color={Color.White}>{t("footer.texts.1")}</Typography>
+          <Grid item col={{ from: 1, to: 2 }}>
+            <Typography color={Color.White} variant="subheader">{t("footer.title")}</Typography>
+            <Typography size="smaller" color={Color.White}>{t("footer.texts.0")}</Typography>
+            <Typography size="smaller" color={Color.White}>{t("footer.texts.1")}</Typography>
+          </Grid>
+          <Grid item col={{ from: 2, to: 3 }}>
+            <Typography color={Color.White} variant="subheader">{t("footer.contact")}</Typography>
+            <Typography size="smaller">
+              <Link color={Color.White} href={`mailto:${t("footer.email.raw")}`}>
+                {t("footer.email.displayed")}
+              </Link>
+            </Typography>
+            <Typography size="smaller">
+              <Link color={Color.White} href={`tel:${t("footer.tel.raw")}`}>
+                {t("footer.tel.displayed")}
+              </Link>
+            </Typography>
+          </Grid>
+          <Grid 
+            item 
+            col={{ from: 1, to: 3 }} 
+            row={{ from: 2, to: 3 }}
+          >
+            <Flex justifyContent="center" alignItems="center">
+              <Typography size="small" color={Color.White}><em>{t("footer.copyright")}</em></Typography>
+            </Flex>
+          </Grid>
         </Grid>
-        <Grid 
-          item 
-          col={{ 
-            default: { from: 3, to: 4 }
-          }} 
-          row={{ 
-            default: { from: 2, to: 3 }
-          }}
-        >
-          <Typography color={Color.White} variant="subheader">{t("footer.contact")}</Typography>
-          <Typography size="smaller">
-            <Link color={Color.White} href={`mailto:${t("footer.email.raw")}`}>
-              {t("footer.email.displayed")}
-            </Link>
-          </Typography>
-          <Typography size="smaller">
-            <Link color={Color.White} href={`tel:${t("footer.tel.raw")}`}>
-              {t("footer.tel.displayed")}
-            </Link>
-          </Typography>
-        </Grid>
-        <Grid 
-          item 
-          col={{ 
-            default: { from: 2, to: 4 }
-          }} 
-          row={{ 
-            default: { from: 3, to: 4 }
-          }}
-        >
-          <Flex justifyContent="center" alignItems="flex-end">
-            <Typography size="small" color={Color.White}><em>{t("footer.copyright")}</em></Typography>
-          </Flex>
-        </Grid>
-        <Grid 
-          item 
-          col={{ from: 4, to: 5 }} 
-          row={{ from: 1, to: 4 }}
-        >
-          <Flex alignItems="center" justifyContent="center">
-            <Image src="/assets/images/footer/B.svg" alt="footer right" />
-          </Flex>
-        </Grid>
+        <Flex alignItems="center" justifyContent="center">
+          <Image src="/assets/images/footer/B.svg" alt="footer right" />
+        </Flex>
       </Grid>
     </footer>
   );
@@ -110,6 +89,7 @@ const useStyles = createUseStyles<RuleName, Props, unknown>({
     backgroundColor: Color.Footer,
     position: 'relative',
     overflow: 'hidden',
+    padding: '1rem', 
   },
 });
 
