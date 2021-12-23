@@ -5,7 +5,7 @@ import { createUseStyles } from 'react-jss';
 // utils
 import { MediaMobile, MediaPad, IProps } from 'utils/Types';
 import { Color, Size } from 'utils/Enums';
-import { AppContext } from 'AppContext';
+import { AppContext } from 'AppContext';
 
 // Atoms ⚛️
 import { Grid } from 'ux/atoms/Grid';
