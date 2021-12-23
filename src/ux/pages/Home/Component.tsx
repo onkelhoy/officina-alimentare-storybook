@@ -16,9 +16,7 @@ import { Header } from 'ux/organisms/Header';
 import { Slider } from 'ux/organisms/Slider';
 import { Partnership } from 'ux/organisms/Partnership';
 
-export interface Props {
- 
-}
+export interface Props {}
 
 export const Home: React.FC<Props> = (props) => {
   const classes = useStyles(props);
