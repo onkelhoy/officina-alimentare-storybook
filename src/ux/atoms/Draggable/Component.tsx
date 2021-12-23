@@ -52,6 +52,7 @@ export const Draggable: React.FC<Props> = (props) => {
 
   // touch functions
   function touchstart (event: TouchEvent) {
+    event.preventDefault();
     info.current.clicked = true;
     info.current.touchindex = event.touches.length - 1;
 
@@ -64,6 +65,7 @@ export const Draggable: React.FC<Props> = (props) => {
 
   function touchmove (event: TouchEvent) {
     if (info.current.clicked) {
+      event.preventDefault();
       if (typeof info.current.touchindex === "number") {
         const touch = event.touches[info.current.touchindex];
         const pos = getPosition(touch);
@@ -163,9 +165,9 @@ export const Draggable: React.FC<Props> = (props) => {
       window.matchMedia('(hover: none)').matches ||
       window.matchMedia('(any-hover: none)').matches
     ) {
-      info.current.touch = true;
       if (!info.current.touch) {
         // add touch listeners
+        info.current.touch = true;
         ref.current.addEventListener('touchstart', touchstart);
         window.document.documentElement.addEventListener('touchmove', touchmove);
         window.document.documentElement.addEventListener('touchend', eventup);
